@@ -1,6 +1,5 @@
-import React, { useState } from "react";
-import "./Loginmodule.css";
-import { useHistory } from "react-router-dom";
+import React from "react";
+import "./loginmodules.css";
 import bg_login from "../../assets/images/bg_login.png";
 
 function Login() {

@@ -1,5 +1,5 @@
 import React from "react";
-import "./loginmodules.css";
+import "./style.css";
 import bg_login from "../../assets/images/bg_login.png";
 
 function Login() {

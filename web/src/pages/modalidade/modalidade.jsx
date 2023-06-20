@@ -1,7 +1,6 @@
 import React from "react";
 import bg_modalidade_jiu from "../../assets/images/bg_modalidade_jiu.png";
 import bg_modalidade_kick from "../../assets/images/bg_modalidade_kick.png";
-import "./modalidade.css";
 
 function Modalidade() {
   return (

@@ -1,0 +1,35 @@
+.container {
+  display: grid;
+  justify-content: center;
+  grid-template-columns: 35% 65%;
+  align-items: center;
+}
+
+.about {
+  width: 817px; /* Largura do texto */
+  height: 606px; /* Altura do texto */
+  color: #ffffff;
+  padding-top: 10 px; /* Posição vertical do topo */
+  padding-right: 0; /* Ajuste conforme necessário */
+  padding-bottom: 0; /* Ajuste conforme necessário */
+  padding-left: 124px; /* Posição horizontal da esquerda */
+  letter-spacing: 5px;
+  text-align: justify;
+  font-family: "Livvic", sans-serif;
+  font-size: 19px;
+  line-height: 24px;
+  text-align: left;
+  vertical-align: top;
+  fill: #ffffff;
+  transform: scale(0.94);
+}
+
+.bg_quemsomos_v2 {
+  width: 450px;
+  height: 500px;
+  position: absolute;
+  top: 259px;
+  right: 100px; /* Ajustado para posicionar a imagem à direita */
+  left: 950px;
+  transform: scale(1.1);
+}

@@ -1,0 +1,33 @@
+.navbar {
+  padding: 2.4rem 0;
+  justify-content: center;
+  display: flex;
+}
+
+ul {
+  list-style-type: none;
+  margin: 0 8px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+li {
+  margin: 0 12px;
+}
+
+li a {
+  color: white;
+  text-transform: capitalize;
+  font-family: 'Livvic', sans-serif;
+  font-weight: 300;
+  font-size: 32px;
+  cursor: pointer;
+}
+li a:hover {
+  border-bottom: 3px solid white;
+}
+
+.centered-text {
+  text-align: center;
+}

@@ -1,0 +1,45 @@
+.telainicial-frame {
+  background-color: rgb(255, 255, 255);
+  height: 550px;
+  width: 1100px;
+  padding-top: 50px;
+  margin-bottom: 100px;
+  margin-top: 0px;
+  margin-right: 100px;
+  border-right-width: 0px;
+  margin-left: 100px;
+  padding-right: 100px;
+}
+
+.table-aluno {
+  margin-left: 50px;
+}
+
+.table th {
+  text-align: left;
+  padding: 8px;
+  border-bottom: 1px solid green;
+}
+
+.table td {
+  padding: 8px;
+  border-bottom: 1px solid green;
+}
+
+.label-aluno {
+  font-weight: bold;
+  border-bottom: 1px solid green;
+}
+
+.value-aluno {
+  border-bottom: 1px solid green;
+}
+
+.sub-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.sub-label-modalidade {
+  border-bottom: 1px solid green;
+}

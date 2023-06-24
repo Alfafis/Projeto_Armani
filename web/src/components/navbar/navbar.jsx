@@ -1,6 +1,7 @@
-import React from "react";
-import { Link, useLocation } from "react-router-dom";
-import "./navbar.css";
+import React from 'react';
+import { Link, useLocation } from 'react-router-dom';
+import { FaUser, FaHome } from 'react-icons/fa';
+import './navbar.css';
 
 function Navbar() {
   const url = useLocation();
@@ -9,26 +10,27 @@ function Navbar() {
       <ul>
         {url.pathname.length > 1 && (
           <li>
-            <Link to="/">home</Link>
+            <Link to="/">
+              <FaHome size={42} />
+            </Link>
           </li>
         )}
         <li>
           <Link to="/about">Quem Somos</Link>
         </li>
         <li>
-          <Link to="/modalidade">Modalidade</Link>
+          <Link to="/modalidade">Modalidades</Link>
         </li>
         <li>
-          <Link to="/horario">Horario</Link>
+          <Link to="/horario">Horários</Link>
         </li>
         <li>
           <Link to="/contato">Contato</Link>
         </li>
         <li>
-          <Link to="/login">login</Link>
-        </li>
-        <li>
-          <Link to="telainicial">telainicial</Link>
+          <Link to="/login">
+            <FaUser size={32} />
+          </Link>
         </li>
       </ul>
     </div>

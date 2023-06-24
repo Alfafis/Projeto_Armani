@@ -1,6 +1,8 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import bg_modalidade_jiu from "../../assets/images/bg_modalidade_jiu.png";
 import bg_modalidade_kick from "../../assets/images/bg_modalidade_kick.png";
+import "./Modalidade.css";
 
 function Modalidade() {
   return (

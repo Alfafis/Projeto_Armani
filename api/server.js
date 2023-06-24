@@ -1,11 +1,8 @@
-/*"use strict";
 "use strict";
 
 const app = require("./app");
 const http = require("http");
 const debug = require("debug")("nodestr:server");
-const mysql = require("mysql");
-const dbConnection = require("../dbConnection/dbConnection");
 
 const port = normalizePort(process.env.port || "3000");
 app.set("port", port);
@@ -55,8 +52,3 @@ function onListening() {
   const bind = typeof addr === "string" ? "pipe" + addr : "port " + addr.port;
   debug("Listening on " + bind);
 }
-server.get("/alunos", (req, res) => {
-  console.log("consultarAluno");
-  dbConnection("select * from alunos", res);
-});
-*/

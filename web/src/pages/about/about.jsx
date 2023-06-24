@@ -1,7 +1,7 @@
-import React from "react";
-import styles from "./about.module.css";
-import bg_quemsomos_v2 from "../../assets/images/bg_quemsomos_v2.png"; // Importe a imagem corretamente
-import { useMediaQuery } from "react-responsive";
+import React from 'react';
+import styles from './about.module.css';
+import bg_quemsomos from '../../assets/images/bg_quemsomos.png'; // Importe a imagem corretamente
+import { useMediaQuery } from 'react-responsive';
 
 function About() {
   const isDesktop = useMediaQuery({ minWidth: 1024 });
@@ -18,7 +18,7 @@ function About() {
             ? styles.tablet
             : isMobile
             ? styles.mobile
-            : ""
+            : ''
         }`}
       >
         <p className={styles.about}>
@@ -47,7 +47,7 @@ function About() {
           motivadora está pronta para recebê-lo de braços abertos.
         </p>
         <img
-          src={bg_quemsomos_v2}
+          src={bg_quemsomos}
           alt="quem somos"
           className={styles.bg_quemsomos_v2} // Use a classe correta definida no arquivo CSS
         />

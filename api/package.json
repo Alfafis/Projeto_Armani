@@ -5,8 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon ./server.js",
-    "vercel-build": ""
+    "start": "node ./server.js",
+    "serve": "nodemon ./server.js",
+    "build": "node create-artifact.js"
   },
   "author": "",
   "license": "ISC",

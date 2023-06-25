@@ -13,6 +13,20 @@ const getUsersRepository = async () => {
   });
 };
 
+const getUserByIdRepository = async (id) => {
+  return new Promise((resolve, reject) => {
+    dbConnection.query(`SELECT * from usuarios where id = ?`, id ,(error, results, fields) => {
+      if (error) {
+        console.error("Erro ao executar a consulta:", error);
+        reject(error);
+        return;
+      }
+      resolve(results);
+    });
+  });
+};
+
+
 const addUserRepository = async ({
   nome_aluno,
   data_nascimento,
@@ -101,6 +115,7 @@ const updateUserRepository = async ({
 
 module.exports = {
   getUsersRepository,
+  getUserByIdRepository,
   addUserRepository,
   updateUserRepository,
 };

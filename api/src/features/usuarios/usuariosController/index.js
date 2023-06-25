@@ -5,8 +5,10 @@ const {
 } = require("../../../../shared/common/responses/responses");
 const {
   getUsersDomain,
+  getUserByIdDomain,
   addUserDomain,
   updateUserDomain,
+
 } = require("../usuariosDomain");
 
 exports.getUsers = async (req, res) => {
@@ -18,7 +20,16 @@ exports.getUsers = async (req, res) => {
     return errorResponse(res, error);
   }
 };
-
+exports.getUserById = async (req, res) => {
+  const {id} = req.params;
+  try {
+    const user = await getUserByIdDomain(id);
+    return response(res, user);
+  } catch (error) {
+    logger.error(error);
+    return errorResponse(res, error);
+  }
+};
 exports.addUser = async (req, res) => {
   const {
     nome_aluno,

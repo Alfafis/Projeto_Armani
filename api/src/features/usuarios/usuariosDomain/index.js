@@ -2,10 +2,17 @@ const {
   getUsersRepository,
   addUserRepository,
   updateUserRepository,
+  getUserByIdRepository,
 } = require("../usuariosRepository");
+
 const getUsersDomain = async () => {
   const users = await getUsersRepository();
   return users;
+};
+
+const getUserByIdDomain = async (id) => {
+  const user = await getUserByIdRepository(id);
+  return user;
 };
 
 const addUserDomain = async ({
@@ -52,6 +59,7 @@ const updateUserDomain = async ({
 
 module.exports = {
   getUsersDomain,
+  getUserByIdDomain,
   addUserDomain,
   updateUserDomain,
 };

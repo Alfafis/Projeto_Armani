@@ -4,12 +4,12 @@ const app = require("./app");
 const http = require("http");
 const debug = require("debug")("nodestr:server");
 
-const port = normalizePort(3000);
+const port = normalizePort(process.env.port || "3000");
 app.set("port", port);
 
 const server = http.createServer(app);
 
-server.listen(port, "0.0.0.0");
+server.listen(port);
 server.on("error", onError);
 server.on("listening", onListening);
 console.log("API rodando na porta " + port);

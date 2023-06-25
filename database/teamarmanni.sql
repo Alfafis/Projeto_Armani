@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 24/06/2023 às 16:10
+-- Tempo de geração: 24/06/2023 às 22:26
 -- Versão do servidor: 10.4.28-MariaDB
 -- Versão do PHP: 8.0.28
 
@@ -78,8 +78,17 @@ CREATE TABLE `modalidadeusuario` (
   `usuario_id` int(11) NOT NULL,
   `modalidade_id` int(11) NOT NULL,
   `grau_faixa` varchar(30) DEFAULT NULL,
-  `valor_modalidade` int(255) DEFAULT NULL
+  `valor_modalidade` int(255) DEFAULT NULL,
+  `ativo` tinyint(1) DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Despejando dados para a tabela `modalidadeusuario`
+--
+
+INSERT INTO `modalidadeusuario` (`id`, `usuario_id`, `modalidade_id`, `grau_faixa`, `valor_modalidade`, `ativo`) VALUES
+(1, 42, 1, 'rosa', 150, 1),
+(2, 42, 2, 'preta', 150, 0);
 
 -- --------------------------------------------------------
 
@@ -122,7 +131,7 @@ CREATE TABLE `usuarios` (
 --
 
 INSERT INTO `usuarios` (`id`, `nome_aluno`, `data_nascimento`, `telefone`, `status_aluno`, `email`, `tipousuarios_id`, `senha`) VALUES
-(42, 'Otávio', '1992-06-27', '31999856321', 1, 'otavio@email.com.br', 1, '123456'),
+(42, 'Rafael Menezes', '1993-01-20', '31999856321', 1, 'rafael@email.com.br', 2, '654321'),
 (43, 'Otávio', '1992-06-27', '31999856321', 1, 'otavio@email.com.br', 1, '123456');
 
 --
@@ -170,7 +179,7 @@ ALTER TABLE `modalidade`
 -- AUTO_INCREMENT de tabela `modalidadeusuario`
 --
 ALTER TABLE `modalidadeusuario`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de tabela `tipousuarios`

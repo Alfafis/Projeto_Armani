@@ -2,8 +2,11 @@
 
 const app = require("./app");
 const https = require("https");
+var cors = require('cors')
 const fs = require("fs");
 const debug = require("debug")("nodestr:server");
+
+app.use(cors())
 
 const port = normalizePort(process.env.port || "3000");
 app.set("port", port);

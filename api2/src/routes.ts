@@ -12,7 +12,6 @@ async function getUsers(req?: any, res?: any) {
     .promise()
     .query('SELECT * FROM usuarios')
     .then(([rows, fields]) => {
-      console.log('results ', rows);
       return rows;
     })
     .catch((err) => {
@@ -27,7 +26,6 @@ async function getModality(req?: any, res?: any) {
     .promise()
     .query('SELECT * FROM modalidade')
     .then(([rows, fields]) => {
-      console.log('results ', rows);
       return rows;
     })
     .catch((err) => {
@@ -43,7 +41,6 @@ async function getUsersById(req?: any, res?: any) {
     .promise()
     .query(`SELECT * FROM usuarios WHERE id = ?`, id)
     .then(([rows, fields]) => {
-      console.log('results ', rows);
       return rows;
     })
     .catch((err) => {
@@ -109,7 +106,6 @@ async function updateUser(req?: any, res?: any) {
     .promise()
     .query(`UPDATE usuarios SET ? WHERE id = ?`, [update, id])
     .then(([rows, fields]) => {
-      console.log('results ', rows);
       return rows;
     })
     .catch((err) => {

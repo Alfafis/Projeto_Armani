@@ -18,7 +18,7 @@ const options = {
 
 const server = https.createServer(options, app);
 
-server.listen(port, "0.0.0.0");
+server.listen(port);
 server.on("error", onError);
 server.on("listening", onListening);
 console.log("API rodando na porta " + port);

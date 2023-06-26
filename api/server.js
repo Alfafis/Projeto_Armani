@@ -1,13 +1,19 @@
 "use strict";
 
 const app = require("./app");
-const http = require("http");
+const https = require("https");
+const fs = require("fs");
 const debug = require("debug")("nodestr:server");
 
 const port = normalizePort(process.env.port || "3000");
 app.set("port", port);
 
-const server = http.createServer(app);
+const options = {
+  key: fs.readFileSync("./certificate/chave-privada.pem"), // Caminho para o arquivo da chave privada
+  cert: fs.readFileSync("./certificate/certificado.pem"), // Caminho para o arquivo do certificado
+};
+
+const server = https.createServer(options, app);
 
 server.listen(port);
 server.on("error", onError);

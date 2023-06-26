@@ -6,9 +6,12 @@ import bodyParser from 'body-parser';
 import {
   getUsers,
   getUsersById,
+  getModality,
+  getModalityUserId,
   addUser,
   updateUser,
-  getModality,
+  addUserModality,
+  updateUserModality,
 } from './routes';
 
 dotenv.config();
@@ -30,14 +33,15 @@ app.use(express.json());
 app.get('/users', getUsers);
 app.get('/users/:id', getUsersById);
 app.get('/modality', getModality);
+app.get('/modality/:id', getModalityUserId);
 
 // rotas POST
-app.post('/add_user', addUser);
-// app.post('/add_user', addUser);
+app.post('/users', addUser);
+app.post('/modality', addUserModality);
 
 // rotas PUT
-app.put('/update_user/:id', updateUser);
-// app.put('/update_user/:id', updateUser);
+app.put('/users/:id', updateUser);
+app.put('/modality/:id', updateUserModality);
 
 app.listen(process.env.PORT || 3000, () => {
   console.log(`Api rodando na porta ${port}`);

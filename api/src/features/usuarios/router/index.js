@@ -1,5 +1,7 @@
 const express = require("express");
-const router = express.Router();
+
+export const routes = express.Router();
+
 const {
   getUsers,
   getUserById,
@@ -11,5 +13,3 @@ router.get("/users", getUsers);
 router.get("/users/:id", getUserById);
 router.post("/users", addUser);
 router.put("/users/:id", updateUser);
-
-module.exports = router;

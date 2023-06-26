@@ -1,14 +1,14 @@
 "use strict";
 
 const app = require("./app");
-const https = require("https");
+const http = require("http");
 var cors = require('cors')
 const fs = require("fs");
 const debug = require("debug")("nodestr:server");
 
 app.use(cors())
 
-const port = normalizePort(process.env.PORT || "3000");
+const port = normalizePort(process.env.PORT || "80");
 app.set("port", port);
 
 const options = {
@@ -16,7 +16,7 @@ const options = {
   cert: fs.readFileSync("./certificate/certificado.pem"), // Caminho para o arquivo do certificado
 };
 
-const server = https.createServer(options, app);
+const server = http.createServer(options, app);
 
 server.listen(port);
 server.on("error", onError);

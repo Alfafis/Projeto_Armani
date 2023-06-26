@@ -8,7 +8,7 @@ const debug = require("debug")("nodestr:server");
 
 app.use(cors())
 
-const port = normalizePort(process.env.port || "3000");
+const port = normalizePort(process.env.CLI_RAILWAY_PORT || "3000");
 app.set("port", port);
 
 const options = {

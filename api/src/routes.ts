@@ -10,7 +10,7 @@ export const routes = express.Router();
 async function getUsers(req?: any, res?: any) {
   const results = await con
     .promise()
-    .query('SELECT * FROM usuarios')
+    .query('SELECT * FROM users')
     .then(([rows, fields]) => {
       return rows;
     })
@@ -24,7 +24,7 @@ async function getUsers(req?: any, res?: any) {
 async function getStudents(req?: any, res?: any) {
   const results = await con
     .promise()
-    .query('SELECT * FROM students')
+    .query('SELECT * FROM student')
     .then(([rows, fields]) => {
       return rows;
     })
@@ -58,7 +58,7 @@ async function addUser(req?: any, res?: any) {
   };
   const results = await con
     .promise()
-    .query(`INSERT INTO usuarios SET ?`, newUser)
+    .query(`INSERT INTO users SET ?`, newUser)
     .then(([rows, fields]) => {
       console.log('results ', rows);
       return rows;
@@ -83,7 +83,7 @@ async function addStudents(req?: any, res?: any) {
   };
   const results = await con
     .promise()
-    .query(`INSERT INTO usuarios SET ?`, newStudent)
+    .query(`INSERT INTO student SET ?`, newStudent)
     .then(([rows, fields]) => {
       console.log('results ', rows);
       return rows;
@@ -110,7 +110,7 @@ async function updateUsers(req?: any, res?: any) {
   }
   const results = await con
     .promise()
-    .query(`UPDATE usuarios SET ? WHERE id = ?`, [updateUser, id])
+    .query(`UPDATE users SET ? WHERE id = ?`, [updateUser, id])
     .then(([rows, fields]) => {
       return rows;
     })
@@ -146,7 +146,7 @@ async function updateStudents(req?: any, res?: any) {
   }
   const results = await con
     .promise()
-    .query(`UPDATE usuarios SET ? WHERE id = ?`, [updateStudent, id])
+    .query(`UPDATE student SET ? WHERE id = ?`, [updateStudent, id])
     .then(([rows, fields]) => {
       return rows;
     })

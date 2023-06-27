@@ -1,17 +1,28 @@
-.container {
-  position: absolute;
-  width: 995px;
-  height: 488px;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  display: grid;
-  justify-content: center;
-  align-items: center;
-}
-
-.image {
+table, th, td {
+  border: 2px solid #E2EFDA;
+  border-collapse: collapse;
+  font-weight: bold;
+  text-align: center;
   width: 100%;
-  height: 100%;
-  object-fit: contain;
+}
+table {
+  border: none;
+  
+}
+th, td {
+  padding: 10px;
+  color: white;
+  font-size: 32px;
+  text-transform: uppercase;
+}
+.thead {
+  background-color: #E2EFDA;
+  color: black;
+}
+td:hover {
+  background-color: #E2EFDA;
+  font-weight: bold;
+  color: black;
+  cursor: pointer;
+  transition: all 0.25s linear;
 }

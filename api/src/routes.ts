@@ -1,7 +1,7 @@
 import mysql from 'mysql2';
 import { dbConfig } from './dbConfig';
 import express from 'express';
-import { TUser, TModality } from './types';
+import { IUser, IModality } from './types';
 
 export const con = mysql.createPool(dbConfig);
 
@@ -87,7 +87,7 @@ async function addUser(req?: any, res?: any) {
     tipousuarios_id,
     senha,
   } = req.body;
-  const newUser: TUser = {
+  const newUser: IUser = {
     nome_aluno,
     data_nascimento,
     telefone,
@@ -112,7 +112,7 @@ async function addUser(req?: any, res?: any) {
 
 async function addUserModality(req?: any, res?: any) {
   const { usuario_id, modalidade_id, grau_faixa, valor_modalidade } = req.body;
-  const newUserModality: TModality = {
+  const newUserModality: IModality = {
     usuario_id,
     modalidade_id,
     grau_faixa,
@@ -143,7 +143,7 @@ async function updateUser(req?: any, res?: any) {
     tipousuarios_id,
     senha,
   } = req.body;
-  const updateUser: TUser = {};
+  const updateUser: IUser = {};
   if (nome_aluno) {
     updateUser.nome_aluno = nome_aluno;
   }
@@ -183,7 +183,7 @@ async function updateUser(req?: any, res?: any) {
 async function updateUserModality(req?: any, res?: any) {
   const { id } = req.params;
   const { grau_faixa, ativo } = req.body;
-  const updateUserModality: TModality = {};
+  const updateUserModality: IModality = {};
   if (grau_faixa) {
     updateUserModality.grau_faixa = grau_faixa;
   }

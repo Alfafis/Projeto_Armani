@@ -1,4 +1,4 @@
-interface TUser {
+interface IUser {
   id?: string;
   nome_aluno?: string;
   data_nascimento?: string;
@@ -8,7 +8,7 @@ interface TUser {
   tipousuarios_id?: string;
   senha?: string;
 }
-interface TModality {
+interface IModality {
   usuario_id?: string;
   modalidade_id?: string;
   grau_faixa?: string;
@@ -16,4 +16,4 @@ interface TModality {
   ativo?: string;
 }
 
-export { TUser, TModality };
+export { IUser, IModality };

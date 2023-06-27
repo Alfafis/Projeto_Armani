@@ -5,14 +5,12 @@ import bodyParser from 'body-parser';
 
 import {
   getUsers,
-  getUsersById,
   getModality,
-  getModalityUserId,
   addUser,
-  updateUser,
-  addUserModality,
-  updateUserModality,
-  getUsersModality,
+  updateUsers,
+  getStudents,
+  addStudents,
+  updateStudents,
 } from './routes';
 
 dotenv.config();
@@ -40,7 +38,7 @@ app.post('/users/:id', addUser);
 app.post('/students/:id', addStudents);
 
 // rotas PUT
-app.put('/users/:id', updateUser);
+app.put('/users/:id', updateUsers);
 app.put('/students/:id', updateStudents);
 
 app.listen(process.env.PORT || 3000, () => {

@@ -163,5 +163,6 @@ export {
   getStudents,
   addUser,
   addStudents,
+  updateUsers,
   updateStudents,
 };

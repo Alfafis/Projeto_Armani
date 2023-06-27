@@ -33,7 +33,7 @@ app.use(express.json());
 // rotas GET
 app.get('/users', getUsers);
 app.get('/users/:id', getUsersById);
-app.get('usersModality', getUsersModality);
+app.get('/usersModality', getUsersModality);
 app.get('/modality', getModality);
 app.get('/usersModality/:id', getModalityUserId);
 

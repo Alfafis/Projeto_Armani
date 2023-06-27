@@ -1,6 +1,38 @@
+import { useEffect, useState } from 'react';
 import './style.css';
+import api from '../../service/api';
 
-function EditAluno() {
+function Student() {
+  const [dados, setDados] = useState<SetStateAction<Array<string>>>([]);
+
+  const getDados = () => {
+    api()
+      .get(`${import.meta.env.VITE_API_ROTA_URL}/usersModality`, {})
+      .then((res) => setDados(res.data))
+      .catch((err) => console.log(err));
+  };
+
+  useEffect(() => {
+    getDados();
+    // getAulas();
+
+    console.log('filtrado', dados);
+  }, [setDados]);
+
+  return (
+    <aside className="student">
+      <h1>Gerenciar Alunos</h1>
+      <form>
+        <label htmlFor="">Nome</label>
+        <input type="text" placeholder="" />
+        <label htmlFor="">Modalidade</label>
+        <input type="text" placeholder="" />
+      </form>
+    </aside>
+  );
+}
+
+function EditStudent() {
   return (
     <div>
       <h1>Editar Aluno</h1>
@@ -71,49 +103,7 @@ function EditAluno() {
   );
 }
 
-function telaInicial() {
-  return (
-    <div className="telainicial-frame">
-      <table className="table-aluno">
-        <thead>
-          <tr>
-            <th className="label-aluno">TOTAL DE ALUNOS</th>
-            <td className="value-aluno">{totalAlunos}</td>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td className="label-aluno">ALUNOS INATIVOS</td>
-            <td className="value-aluno">{alunosInativos}</td>
-          </tr>
-          <tr>
-            <td className="label-aluno">ALUNOS ATIVOS</td>
-            <td className="value-aluno">{alunosAtivos}</td>
-          </tr>
-          <tr>
-            <td className="label-aluno">MODALIDADE</td>
-            <td>
-              <table>
-                <tr>
-                  <td className="sub-label-modalidade">
-                    {kickboxingAlunos} KICKBOXING
-                  </td>
-                </tr>
-                <tr>
-                  <td className="sub-label-modalidade">
-                    {jiuJitsuAlunos} JIU-JÍTSU
-                  </td>
-                </tr>
-              </table>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  );
-}
-
-function VisualizarAluno() {
+function ViewStudents() {
   return (
     <div className="container-visualizar">
       <div className="visualizar-frame">
@@ -175,7 +165,7 @@ function VisualizarAluno() {
   );
 }
 
-function Student() {
+function AddStudent() {
   return (
     <div className="cadastro-container">
       <div className="cadastro-frame">

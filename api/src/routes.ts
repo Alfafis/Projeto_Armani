@@ -208,11 +208,12 @@ async function updateUserModality(req?: any, res?: any) {
 
 export {
   getUsers,
+  getModality,
   getUsersById,
+  getUsersModality,
   getModalityUserId,
   addUser,
-  updateUser,
-  getModality,
   addUserModality,
+  updateUser,
   updateUserModality,
 };

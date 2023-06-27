@@ -1,9 +1,22 @@
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { VscAccount, VscHome } from 'react-icons/vsc';
+import { VscAccount, VscSignOut, VscHome } from 'react-icons/vsc';
 
 import './style.css';
 
 function Navbar() {
+  const [step, SetStep] = useState<number>(0);
+
+  const checkLogin = () => {
+    const login = sessionStorage.getItem('login');
+    return login;
+  };
+
+  useEffect(() => {
+    const aux = checkLogin();
+    aux === 'true' ? SetStep(1) : SetStep(0);
+  }, []);
+
   return (
     <div className="navbar">
       <ul>
@@ -24,11 +37,17 @@ function Navbar() {
         <li>
           <Link to="/Contact">Contato</Link>
         </li>
-        <li>
-          <Link to="/Login">
-            <VscAccount size={32} />
-          </Link>
-        </li>
+        {step === 0 ? (
+          <li>
+            <Link to="/Login">
+              <VscAccount size={32} />
+            </Link>
+          </li>
+        ) : (
+          <li>
+            <VscSignOut size={32} color="white" />
+          </li>
+        )}
       </ul>
     </div>
   );

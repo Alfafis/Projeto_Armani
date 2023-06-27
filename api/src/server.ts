@@ -12,6 +12,7 @@ import {
   updateUser,
   addUserModality,
   updateUserModality,
+  getUsersModality,
 } from './routes';
 
 dotenv.config();
@@ -32,8 +33,9 @@ app.use(express.json());
 // rotas GET
 app.get('/users', getUsers);
 app.get('/users/:id', getUsersById);
+app.get('usersModality', getUsersModality);
 app.get('/modality', getModality);
-app.get('/modality/:id', getModalityUserId);
+app.get('/usersModality/:id', getModalityUserId);
 
 // rotas POST
 app.post('/users', addUser);

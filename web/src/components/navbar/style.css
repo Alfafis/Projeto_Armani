@@ -5,7 +5,7 @@
   padding-bottom: 100px;
 }
 
-ul {
+.navbar ul {
   list-style-type: none;
   margin: 0 8px;
   display: flex;
@@ -13,11 +13,11 @@ ul {
   align-items: center;
 }
 
-li {
+.navbar li {
   margin: 0 12px;
 }
 
-li a {
+.navbar li a {
   color: white;
   text-transform: capitalize;
   font-family: 'Livvic', sans-serif;
@@ -25,10 +25,10 @@ li a {
   font-size: 32px;
   cursor: pointer;
 }
-li a:hover {
+.navbar li a:hover {
   border-bottom: 3px solid white;
 }
 
-.centered-text {
+.navbar .centered-text {
   text-align: center;
 }

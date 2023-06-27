@@ -35,9 +35,16 @@ async function getModality(req?: any, res?: any) {
   res.json(results);
 }
 async function getUsersModality(req?: any, res?: any) {
+  const { id } = req.params;
   const results = await con
     .promise()
-    .query('SELECT * FROM modalidadeusuario')
+    .query(
+      `SELECT M.nome as Modalidade,MU.valor_modalidade as Valor, U.nome_aluno as Aluno, MU.grau_faixa as GrauFaixa, MU.ativo from modalidadeusuario AS MU
+    INNER JOIN modalidade AS M ON M.id = MU.modalidade_id
+    INNER JOIN usuarios AS U ON U.id = MU.usuario_id
+    where usuario_id =  ?`,
+      id
+    )
     .then(([rows, fields]) => {
       return rows;
     })

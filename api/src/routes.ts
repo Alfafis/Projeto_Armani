@@ -1,7 +1,7 @@
 import mysql from 'mysql2';
 import { dbConfig } from './dbConfig';
 import express from 'express';
-import { IUser, IModality } from './types';
+import { IUser, IModality, IStudent } from './types';
 
 export const con = mysql.createPool(dbConfig);
 
@@ -21,60 +21,24 @@ async function getUsers(req?: any, res?: any) {
   res.json(results);
 }
 
+async function getStudents(req?: any, res?: any) {
+  const results = await con
+    .promise()
+    .query('SELECT * FROM students')
+    .then(([rows, fields]) => {
+      return rows;
+    })
+    .catch((err) => {
+      console.log(err);
+      return err;
+    });
+  res.json(results);
+}
+
 async function getModality(req?: any, res?: any) {
   const results = await con
     .promise()
-    .query('SELECT * FROM modalidade')
-    .then(([rows, fields]) => {
-      return rows;
-    })
-    .catch((err) => {
-      console.log(err);
-      return err;
-    });
-  res.json(results);
-}
-async function getUsersModality(req?: any, res?: any) {
-  const { id } = req.params;
-  const results = await con
-    .promise()
-    .query(
-      `SELECT M.nome as Modalidade,MU.valor_modalidade as Valor, U.nome_aluno as Aluno, MU.grau_faixa as GrauFaixa, MU.ativo from modalidadeusuario AS MU
-    INNER JOIN modalidade AS M ON M.id = MU.modalidade_id
-    INNER JOIN usuarios AS U ON U.id = MU.usuario_id
-    where usuario_id =  ?`,
-      id
-    )
-    .then(([rows, fields]) => {
-      return rows;
-    })
-    .catch((err) => {
-      console.log(err);
-      return err;
-    });
-  res.json(results);
-}
-
-async function getUsersById(req?: any, res?: any) {
-  const { id } = req.params;
-  const results = await con
-    .promise()
-    .query(`SELECT * FROM usuarios WHERE id = ?`, id)
-    .then(([rows, fields]) => {
-      return rows;
-    })
-    .catch((err) => {
-      console.log(err);
-      return err;
-    });
-  res.json(results);
-}
-
-async function getModalityUserId(req?: any, res?: any) {
-  const { id } = req.params;
-  const results = await con
-    .promise()
-    .query(`SELECT * FROM usuarios WHERE id = ?`, id)
+    .query('SELECT * FROM modality')
     .then(([rows, fields]) => {
       return rows;
     })
@@ -86,21 +50,10 @@ async function getModalityUserId(req?: any, res?: any) {
 }
 
 async function addUser(req?: any, res?: any) {
-  const {
-    nome_aluno,
-    data_nascimento,
-    telefone,
-    email,
-    tipousuarios_id,
-    senha,
-  } = req.body;
+  const { nome, email, senha } = req.body;
   const newUser: IUser = {
-    nome_aluno,
-    data_nascimento,
-    telefone,
+    nome,
     email,
-    status_aluno: '1',
-    tipousuarios_id,
     senha,
   };
   const results = await con
@@ -117,17 +70,20 @@ async function addUser(req?: any, res?: any) {
   res.json(results);
 }
 
-async function addUserModality(req?: any, res?: any) {
-  const { usuario_id, modalidade_id, grau_faixa, valor_modalidade } = req.body;
-  const newUserModality: IModality = {
-    usuario_id,
-    modalidade_id,
+async function addStudents(req?: any, res?: any) {
+  const { nome, modalidade, grau_faixa, situacao, dia_semana, horario } =
+    req.body;
+  const newStudent: IStudent = {
+    nome,
+    modalidade,
     grau_faixa,
-    valor_modalidade,
+    situacao,
+    dia_semana,
+    horario,
   };
   const results = await con
     .promise()
-    .query(`INSERT INTO usuarios SET ?`, newUserModality)
+    .query(`INSERT INTO usuarios SET ?`, newStudent)
     .then(([rows, fields]) => {
       console.log('results ', rows);
       return rows;
@@ -139,37 +95,15 @@ async function addUserModality(req?: any, res?: any) {
   res.json(results);
 }
 
-async function updateUser(req?: any, res?: any) {
+async function updateUsers(req?: any, res?: any) {
   const { id } = req.params;
-  const {
-    nome_aluno,
-    data_nascimento,
-    telefone,
-    status_aluno,
-    email,
-    tipousuarios_id,
-    senha,
-  } = req.body;
+  const { nome, email, senha } = req.body;
   const updateUser: IUser = {};
-  if (nome_aluno) {
-    updateUser.nome_aluno = nome_aluno;
-  }
-  if (data_nascimento) {
-    updateUser.data_nascimento = data_nascimento;
-  }
-  if (telefone) {
-    updateUser.telefone = telefone;
-  }
-  if (status_aluno) {
-    updateUser.status_aluno = status_aluno;
-  } else {
-    updateUser.status_aluno = '0';
+  if (nome) {
+    updateUser.nome = nome;
   }
   if (email) {
     updateUser.email = email;
-  }
-  if (tipousuarios_id) {
-    updateUser.tipousuarios_id = tipousuarios_id;
   }
   if (senha) {
     updateUser.senha = senha;
@@ -187,22 +121,32 @@ async function updateUser(req?: any, res?: any) {
   res.json(results);
 }
 
-async function updateUserModality(req?: any, res?: any) {
+async function updateStudents(req?: any, res?: any) {
   const { id } = req.params;
-  const { grau_faixa, ativo } = req.body;
-  const updateUserModality: IModality = {};
+  const { nome, modalidade, grau_faixa, situacao, dia_semana, horario } =
+    req.body;
+  const updateStudent: IStudent = {};
+  if (nome) {
+    updateStudent.nome = nome;
+  }
+  if (modalidade) {
+    updateStudent.modalidade = modalidade;
+  }
   if (grau_faixa) {
-    updateUserModality.grau_faixa = grau_faixa;
+    updateStudent.grau_faixa = grau_faixa;
   }
-  if (ativo) {
-    updateUserModality.ativo = ativo;
-  } else {
-    updateUserModality.ativo = '0';
+  if (situacao) {
+    updateStudent.situacao = situacao;
   }
-
+  if (dia_semana) {
+    updateStudent.dia_semana = dia_semana;
+  }
+  if (horario) {
+    updateStudent.horario = horario;
+  }
   const results = await con
     .promise()
-    .query(`UPDATE usuarios SET ? WHERE id = ?`, [updateUserModality, id])
+    .query(`UPDATE usuarios SET ? WHERE id = ?`, [updateStudent, id])
     .then(([rows, fields]) => {
       return rows;
     })
@@ -216,11 +160,8 @@ async function updateUserModality(req?: any, res?: any) {
 export {
   getUsers,
   getModality,
-  getUsersById,
-  getUsersModality,
-  getModalityUserId,
+  getStudents,
   addUser,
-  addUserModality,
-  updateUser,
-  updateUserModality,
+  addStudents,
+  updateStudents,
 };

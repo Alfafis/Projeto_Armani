@@ -7,16 +7,15 @@ function Student() {
 
   const getDados = () => {
     api()
-      .get(`${import.meta.env.VITE_API_ROTA_URL}/usersModality`, {})
+      .get(`${import.meta.env.VITE_API_ROTA_URL}/usersModality/42`, {})
       .then((res) => setDados(res.data))
       .catch((err) => console.log(err));
   };
 
   useEffect(() => {
     getDados();
-    // getAulas();
 
-    console.log('filtrado', dados);
+    console.log('dados', dados);
   }, [setDados]);
 
   return (
@@ -28,6 +27,25 @@ function Student() {
         <label htmlFor="">Modalidade</label>
         <input type="text" placeholder="" />
       </form>
+      <table>
+        <thead>
+          <tr>
+            <th>Nome</th>
+            <th>Modalidade</th>
+            <th>Faixa</th>
+            <th>Data Pagamento</th>
+            <th>Situação</th>
+            <th>Opções</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            {dados.map(({ nome_aluno, status_aluno }, key) => (
+              <td key={key}>{a}</td>
+            ))}
+          </tr>
+        </tbody>
+      </table>
     </aside>
   );
 }

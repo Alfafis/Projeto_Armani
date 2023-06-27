@@ -32,18 +32,16 @@ app.use(express.json());
 
 // rotas GET
 app.get('/users', getUsers);
-app.get('/users/:id', getUsersById);
-app.get('/usersModality:id', getUsersModality);
 app.get('/modality', getModality);
-app.get('/usersModality/:id', getModalityUserId);
+app.get('/students', getStudents);
 
 // rotas POST
-app.post('/users', addUser);
-app.post('/modality', addUserModality);
+app.post('/users/:id', addUser);
+app.post('/students/:id', addStudents);
 
 // rotas PUT
 app.put('/users/:id', updateUser);
-app.put('/modality/:id', updateUserModality);
+app.put('/students/:id', updateStudents);
 
 app.listen(process.env.PORT || 3000, () => {
   console.log(`Api rodando na porta ${port}`);

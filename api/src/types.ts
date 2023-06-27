@@ -1,19 +1,24 @@
 interface IUser {
-  id?: string;
-  nome_aluno?: string;
-  data_nascimento?: string;
-  telefone?: string;
+  id?: number;
+  nome?: string;
   email?: string;
-  status_aluno?: string;
-  tipousuarios_id?: string;
-  senha?: string;
+  senha?: number;
 }
-interface IModality {
-  usuario_id?: string;
-  modalidade_id?: string;
+interface IStudent {
+  id?: number;
+  nome?: string;
+  modalidade?: string;
   grau_faixa?: string;
-  valor_modalidade?: string;
-  ativo?: string;
+  situacao?: string;
+  dia_semana?: string;
+  horario?: string;
 }
 
-export { IUser, IModality };
+interface IModality {
+  id?: number;
+  nome?: string;
+  dia_semana?: string;
+  horario?: string;
+}
+
+export { IUser, IStudent, IModality };

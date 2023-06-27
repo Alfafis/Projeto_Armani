@@ -27,45 +27,66 @@ SET time_zone = "+00:00";
 -- Estrutura para tabela `modalidade`
 --
 
-CREATE TABLE `modalidade` (
+CREATE TABLE `modality` (
   `id` int(11) NOT NULL,
-  `nome` varchar(50) NOT NULL,
-  `descricao` varchar(300) DEFAULT NULL,
-  `turno` varchar(20) NOT NULL,
+  `nome` varchar(255) NOT NULL,
   `dia_semana` enum('Segunda','Terça','Quarta','Quinta','Sexta','Sábado','Domingo') NOT NULL,
-  `hora_inicio` time DEFAULT NULL,
-  `hora_fim` time DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `horario` time DEFAULT NULL
+);
 
 --
 -- Despejando dados para a tabela `modalidade`
 --
 
-INSERT INTO `modalidade` (`id`, `nome`, `descricao`, `turno`, `dia_semana`, `hora_inicio`, `hora_fim`) VALUES
-(1, 'kickboxing', '', 'manhã', 'Segunda', '06:00:00', '07:00:00'),
-(2, 'kickboxing', '', 'manhã', 'Segunda', '07:00:00', '08:00:00'),
-(3, 'kickboxing', '', 'manhã', 'Segunda', '08:00:00', '09:00:00'),
-(4, 'kickboxing', '', 'tarde', 'Segunda', '17:00:00', '18:00:00'),
-(5, 'kickboxing', '', 'tarde', 'Segunda', '18:00:00', '19:00:00'),
-(6, 'kickboxing', '', 'noite', 'Segunda', '19:00:00', '20:00:00'),
-(7, 'kickboxing', '', 'noite', 'Segunda', '20:00:00', '21:00:00'),
-(8, 'kickboxing', '', 'noite', 'Terça', '19:00:00', '20:00:00'),
-(9, 'jiu-jítsu', '', 'noite', 'Terça', '20:00:00', '21:00:00'),
-(10, 'kickboxing', '', 'manhã', 'Quarta', '06:00:00', '07:00:00'),
-(11, 'kickboxing', '', 'manhã', 'Quarta', '07:00:00', '08:00:00'),
-(12, 'kickboxing', '', 'tarde', 'Quarta', '17:00:00', '18:00:00'),
-(13, 'kickboxing', '', 'tarde', 'Quarta', '18:00:00', '19:00:00'),
-(14, 'kickboxing', '', 'noite', 'Quarta', '19:00:00', '20:00:00'),
-(15, 'kickboxing', '', 'noite', 'Quarta', '20:00:00', '21:00:00'),
-(16, 'kickboxing', '', 'noite', 'Quinta', '19:00:00', '20:00:00'),
-(17, 'jiu-jítsu', '', 'noite', 'Quinta', '20:00:00', '21:00:00'),
-(18, 'kickboxing', '', 'manhã', 'Sexta', '06:00:00', '07:00:00'),
-(19, 'kickboxing', '', 'manhã', 'Sexta', '07:00:00', '08:00:00'),
-(20, 'kickboxing', '', 'tarde', 'Sexta', '17:00:00', '18:00:00'),
-(21, 'kickboxing', '', 'tarde', 'Sexta', '18:00:00', '19:00:00'),
-(22, 'kickboxing', '', 'noite', 'Sexta', '19:00:00', '20:00:00'),
-(23, 'jiu-jítsu', '', 'noite', 'Sexta', '20:00:00', '21:00:00'),
-(24, 'kickboxing', '', 'manhã', 'Sábado', '08:00:00', '09:00:00');
+INSERT INTO `modality` (`id`, `nome`, `dia_semana`, `horario`) VALUES
+(1, 'kickboxing', 'Segunda', '06:00:00'),
+(2, 'kickboxing', 'Segunda', '07:00:00'),
+(3, 'kickboxing', 'Segunda', '08:00:00'),
+(4, '', 'Segunda', '09:00:00'),
+(5, 'kickboxing', 'Segunda', '17:00:00'),
+(6, 'kickboxing', 'Segunda', '18:00:00'),
+(7, 'kickboxing', 'Segunda', '19:00:00'),
+(8, 'kickboxing', 'Segunda', '20:00:00'),
+(9, '', 'Terça', '06:00:00'),
+(10, '', 'Terça', '07:00:00'),
+(11, '', 'Terça', '08:00:00'),
+(12, '', 'Terça', '09:00:00'),
+(13, '', 'Terça', '17:00:00'),
+(14, '', 'Terça', '18:00:00'),
+(15, 'jiu-jítsu', 'Terça', '19:00:00'),
+(16, 'kickboxing', 'Terça', '20:00:00'),
+(17, 'kickboxing', 'Quarta', '06:00:00'),
+(18, 'kickboxing', 'Quarta', '07:00:00'),
+(19, '', 'Quarta', '08:00:00'),
+(20, '', 'Quarta', '09:00:00'),
+(21, 'kickboxing', 'Quarta', '17:00:00'),
+(22, 'kickboxing', 'Quarta', '18:00:00'),
+(23, 'kickboxing', 'Quarta', '19:00:00'),
+(24, 'kickboxing', 'Quarta', '20:00:00'),
+(25, '', 'Quinta', '06:00:00'),
+(26, '', 'Quinta', '07:00:00'),
+(27, '', 'Quinta', '08:00:00'),
+(28, '', 'Quinta', '09:00:00'),
+(29, '', 'Quinta', '17:00:00'),
+(30, '', 'Quinta', '18:00:00'),
+(31, 'kickboxing', 'Quinta', '19:00:00'),
+(32, 'jiu-jítsu', 'Quinta', '20:00:00'),
+(33, 'kickboxing', 'Sexta', '06:00:00'),
+(34, 'kickboxing', 'Sexta', '07:00:00'),
+(35, '', 'Sexta', '08:00:00'),
+(36, '', 'Sexta', '09:00:00'),
+(37, 'kickboxing', 'Sexta', '17:00:00'),
+(38, 'kickboxing', 'Sexta', '18:00:00'),
+(39, 'kickboxing', 'Sexta', '19:00:00'),
+(40, 'jiu-jítsu', 'Sexta', '20:00:00'),
+(41, '', 'Sábado', '06:00:00'),
+(42, '', 'Sábado', '07:00:00'),
+(43, 'kickboxing', 'Sábado', '08:00:00'),
+(44, '', 'Sábado', '09:00:00'),
+(45, '', 'Sábado', '17:00:00'),
+(46, '', 'Sábado', '18:00:00'),
+(47, '', 'Sábado', '19:00:00'),
+(48, '', 'Sábado', '20:00:00');
 
 -- --------------------------------------------------------
 
@@ -73,41 +94,26 @@ INSERT INTO `modalidade` (`id`, `nome`, `descricao`, `turno`, `dia_semana`, `hor
 -- Estrutura para tabela `modalidadeusuario`
 --
 
-CREATE TABLE `modalidadeusuario` (
+CREATE TABLE `student` (
   `id` int(11) NOT NULL,
-  `usuario_id` int(11) NOT NULL,
-  `modalidade_id` int(11) NOT NULL,
-  `grau_faixa` varchar(30) DEFAULT NULL,
-  `valor_modalidade` int(255) DEFAULT NULL,
-  `ativo` tinyint(1) DEFAULT 1
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `nome` varchar(255) DEFAULT NULL,
+  `modalidade` varchar(255) NOT NULL,
+  `grau_faixa` varchar(255) NOT NULL,
+  `situacao` varchar(255) NOT NULL,
+  `dia_semana` varchar(255)  NOT NULL,
+  `horario` varchar(255) NOT NULL
+);
 
 --
 -- Despejando dados para a tabela `modalidadeusuario`
 --
 
-INSERT INTO `modalidadeusuario` (`id`, `usuario_id`, `modalidade_id`, `grau_faixa`, `valor_modalidade`, `ativo`) VALUES
-(1, 42, 1, 'rosa', 150, 1),
-(2, 42, 2, 'preta', 150, 0);
-
--- --------------------------------------------------------
-
---
--- Estrutura para tabela `tipousuarios`
---
-
-CREATE TABLE `tipousuarios` (
-  `id` int(11) NOT NULL,
-  `type` varchar(30) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Despejando dados para a tabela `tipousuarios`
---
-
-INSERT INTO `tipousuarios` (`id`, `type`) VALUES
-(1, 'Professor'),
-(2, 'Aluno');
+INSERT INTO `student` (`id`, `nome`, `modalidade`, `grau_faixa`, `situacao`,`dia_semana`,   `horario`) VALUES
+(1, "mateus", "kickboxing", 'branco', "regular", "segunda, terca, quinta, sexta", "09:00:00, 18:00:00"),
+(2, "pedro", "jiu-jítsu", 'branco', "irregular", "terca, quinta, sexta", "07:00:00, 08:00:00"),
+(3, "ingrid", "jiu-jítsu", 'rosa', "regular", "terca, quarta, sabado", "07:00:00, 08:00:00, 17:00:00, 18:00:00"),
+(4, "rafael", "kickboxing", 'branco', "irregular", "segunda, quinta", "07:00:00, 08:00:00"),
+(5, "brener", "kickboxing", 'branco', "regular", "segunda, sexta", "07:00:00, 08:00:00");
 
 -- --------------------------------------------------------
 
@@ -115,103 +121,18 @@ INSERT INTO `tipousuarios` (`id`, `type`) VALUES
 -- Estrutura para tabela `usuarios`
 --
 
-CREATE TABLE `usuarios` (
+CREATE TABLE `users` (
   `id` int(11) NOT NULL,
-  `nome_aluno` varchar(50) DEFAULT NULL,
-  `data_nascimento` date DEFAULT NULL,
-  `telefone` varchar(50) DEFAULT NULL,
-  `status_aluno` tinyint(1) NOT NULL DEFAULT 1,
-  `email` varchar(35) NOT NULL,
-  `tipousuarios_id` int(11) NOT NULL,
-  `senha` varchar(255) NOT NULL
+  `nome` varchar(255) DEFAULT NULL,
+  `email` varchar(255) NOT NULL,
+  `senha` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Despejando dados para a tabela `usuarios`
 --
 
-INSERT INTO `usuarios` (`id`, `nome_aluno`, `data_nascimento`, `telefone`, `status_aluno`, `email`, `tipousuarios_id`, `senha`) VALUES
-(42, 'Rafael Menezes', '1993-01-20', '31999856321', 1, 'rafael@email.com.br', 2, '654321'),
-(43, 'Otávio', '1992-06-27', '31999856321', 1, 'otavio@email.com.br', 1, '123456');
-
---
--- Índices para tabelas despejadas
---
-
---
--- Índices de tabela `modalidade`
---
-ALTER TABLE `modalidade`
-  ADD PRIMARY KEY (`id`);
-
---
--- Índices de tabela `modalidadeusuario`
---
-ALTER TABLE `modalidadeusuario`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `user_id` (`usuario_id`),
-  ADD KEY `modalidade_id` (`modalidade_id`);
-
---
--- Índices de tabela `tipousuarios`
---
-ALTER TABLE `tipousuarios`
-  ADD PRIMARY KEY (`id`);
-
---
--- Índices de tabela `usuarios`
---
-ALTER TABLE `usuarios`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `tipousuarios_id` (`tipousuarios_id`);
-
---
--- AUTO_INCREMENT para tabelas despejadas
---
-
---
--- AUTO_INCREMENT de tabela `modalidade`
---
-ALTER TABLE `modalidade`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
-
---
--- AUTO_INCREMENT de tabela `modalidadeusuario`
---
-ALTER TABLE `modalidadeusuario`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
--- AUTO_INCREMENT de tabela `tipousuarios`
---
-ALTER TABLE `tipousuarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
--- AUTO_INCREMENT de tabela `usuarios`
---
-ALTER TABLE `usuarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
-
---
--- Restrições para tabelas despejadas
---
-
---
--- Restrições para tabelas `modalidadeusuario`
---
-ALTER TABLE `modalidadeusuario`
-  ADD CONSTRAINT `modalidadeusuario_ibfk_1` FOREIGN KEY (`usuario_id`) REFERENCES `usuarios` (`id`),
-  ADD CONSTRAINT `modalidadeusuario_ibfk_2` FOREIGN KEY (`modalidade_id`) REFERENCES `modalidade` (`id`);
-
---
--- Restrições para tabelas `usuarios`
---
-ALTER TABLE `usuarios`
-  ADD CONSTRAINT `fk_usertype` FOREIGN KEY (`tipousuarios_id`) REFERENCES `tipousuarios` (`id`),
-  ADD CONSTRAINT `usuarios_ibfk_1` FOREIGN KEY (`tipousuarios_id`) REFERENCES `tipousuarios` (`id`);
-COMMIT;
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+INSERT INTO `users` (`id`, `nome`, `email`, `senha`) VALUES
+(1, "Rafael", "rafael@email.com.br", 123),
+(2, "Otávio", "otavio@email.com.br", 321),
+(3, "Ingrid", "ingrid@email.com.br", 000),

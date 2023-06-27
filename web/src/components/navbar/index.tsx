@@ -1,11 +1,13 @@
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { VscAccount, VscSignOut, VscHome } from 'react-icons/vsc';
 
 import './style.css';
 
 function Navbar() {
   const [step, SetStep] = useState<number>(0);
+
+  const location = useLocation();
 
   const checkLogin = () => {
     const login = sessionStorage.getItem('login');
@@ -37,15 +39,19 @@ function Navbar() {
         <li>
           <Link to="/Contact">Contato</Link>
         </li>
-        {step === 0 ? (
+        {step === 0 ||
+          (location.pathname !== '/student' && (
+            <li>
+              <Link to="/Login">
+                <VscAccount size={32} />
+              </Link>
+            </li>
+          ))}
+        {step === 1 && location.pathname === '/student' && (
           <li>
-            <Link to="/Login">
-              <VscAccount size={32} />
+            <Link to="/">
+              <VscSignOut size={32} color="white" />
             </Link>
-          </li>
-        ) : (
-          <li>
-            <VscSignOut size={32} color="white" />
           </li>
         )}
       </ul>

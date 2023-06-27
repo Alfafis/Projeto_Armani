@@ -1,172 +1,59 @@
-.telainicial-frame {
-  background-color: rgb(255, 255, 255);
-  height: 550px;
-  width: 1100px;
-  padding-top: 50px;
-  margin-bottom: 100px;
-  margin-top: 0px;
-  margin-right: 100px;
-  border-right-width: 0px;
-  margin-left: 100px;
-  padding-right: 100px;
-}
-
-.table-aluno {
-  margin-left: 50px;
-}
-
-.table th {
-  text-align: left;
-  padding: 8px;
-  border-bottom: 1px solid green;
-}
-
-.table td {
-  padding: 8px;
-  border-bottom: 1px solid green;
-}
-
-.label-aluno {
-  font-weight: bold;
-  border-bottom: 1px solid green;
-}
-
-.value-aluno {
-  border-bottom: 1px solid green;
-}
-
-.sub-table {
-  width: 100%;
-  border-collapse: collapse;
-}
-
-.sub-label-modalidade {
-  border-bottom: 1px solid green;
-}
-
-
-.cadastrar {
-  margin-left: 20px;
-}
-
-.cadastrar-button {
-  font-family: "Livvic";
-  font-size: 16px;
-  padding: 8px 16px;
-  background-color: #116626;
-  color: #fff;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-.visualizar-frame {
-  background-color: rgb(255, 255, 255);
-  height: 550px;
-  width: 1100px;
-  padding-top: 50px;
-  margin-bottom: 100px;
-  margin-top: 0px;
-  margin-right: 100px;
-  border-right-width: 0px;
-  margin-left: 100px;
-  padding-right: 100px;
-}
-/* 
-p {
-  color: rgb(0, 0, 0);
-  height: 80px;
-  width: 500px;
-  margin-bottom: 0px;
-  margin-top: 0px;
-  font-family: "Livvic";
-} */
-
-.student .label {
-  display: inline-block;
-  width: 60px;
-  font-family: "Livvic";
-}
-
-tr {
-  padding-left: 40px;
-}
-
-td {
-  padding-left: 15px;
-}
-
-.resultado-container {
-  padding-top: 40px;
-  font-family: "Livvic";
-  height: 30px;
-}
-
-.resultado-frame {
-  padding-top: 10px;
-  font-family: "Livvic";
-  margin-left: 20px;
-  padding-right: 500px;
-  height: 30px;
-  padding-right: 500px;
-  border: 1px solid #575151;
-  margin-top: 5px;
-}
-
-.cadastro-container {
-  display: flex;
-  justify-content: center;
+.student h1 {
   align-items: center;
-}
-
-.cadastro-frame {
-  width: 1000px;
-  background-color: rgb(255, 254, 253);
-  padding-left: 200px;
-  border-radius: 20px;
-  margin-bottom: 200px;
-  height: 500px;
-}
-
-.cadastro-form {
+  font-size: 42px;
+  color: #c9c7c7;
   display: flex;
-  flex-direction: column;
-  height: 300px;
-  color: #087234;
-  margin-top: 40px;
-  margin-bottom: 50px;
+  grid-gap: 16px;
 }
 
-.cadastro-title {
-  color: hsl(0, 0%, 0%);
-  font-size: 30px;
-  margin-top: 20px;
-  margin-bottom: 20px;
-  width: 1000px;
-  height: 400px;
+.student form {
+  padding-bottom: 16px;
 }
 
-.cadastro-group {
-  margin-bottom: 20px;
+.student form label {
+  color: #c9c7c7;
+  text-transform: uppercase;
 }
 
-.cadastro-label {
-  font-size: 18px;
-  margin-bottom: 50px;
-}
-
-.cadastro-input {
-  padding: 5px;
-  font-size: 18px;
-}
-
-.cadastro-button {
-  background-color: #0f3002;
-  color: #fff;
+.student form input {
+  margin: 0 12px;
+  background-color: #c9c7c7;
   border: none;
-  padding: 10px;
-  border-radius: 10px;
-  cursor: pointer;
-  width: 150px;
+  padding: 4px 12px;
+}
+
+.student table {
+  width: 100%;
+  border: none;
+  border-spacing: inherit;
+  border-collapse: none;
+}
+
+.student table thead th {
+  background-color: #c9c7c7;
+  text-transform: uppercase;
+  color: #222727;
+  text-align: center;
+  font-size: 20px;
+  padding: 4px;
+}
+
+.student table tbody td {
+  background-color: #c9c7c7;
+  text-transform: capitalize;
+  text-align: center;
   font-size: 18px;
+  padding: 2px;
+}
+
+.student table button {
+  background-color: transparent;
+  cursor: pointer;
+  border: none;
+  color: #222727;
+}
+
+.student table button:hover {
+  transition: all 0.25s linear;
+  color: #0F3002;
 }

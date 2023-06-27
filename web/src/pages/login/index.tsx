@@ -1,11 +1,11 @@
-import { FormEvent, useEffect, useState } from 'react';
+import { FormEvent, SetStateAction, useEffect, useState } from 'react';
 import bg_login from '../../assets/images/bg_login.png';
 import { useNavigate } from 'react-router-dom';
 import api from '../../service/api';
 import './style.css';
 
 function Login() {
-  const [dados, setDados] = useState<SetStateAction<Array<string>>>([]);
+  const [dados, setDados] = useState<SetStateAction<any>>([]);
   const [email, setEmail] = useState<string | null>(null);
   const [password, setPassword] = useState<string | null>(null);
   const [step, setStep] = useState<number>(0);
@@ -23,7 +23,9 @@ function Login() {
     event.preventDefault();
     getDados();
 
-    const login = dados.find((a) => a.email === email && a.senha === password);
+    const login = dados.find(
+      (a: any) => a.email === email && a.senha === password
+    );
 
     console.log(login);
 
@@ -95,6 +97,3 @@ function Login() {
 }
 
 export default Login;
-function useAuth() {
-  throw new Error('Function not implemented.');
-}

@@ -13,13 +13,13 @@ import NotFound from '../pages/NotFound';
 const Router = () => (
   <Routes>
     <Route path={'/'} element={<Home />} />
-    <Route exact path={'/About'} element={<About />} />
-    <Route exact path={'/Contact'} element={<Contact />} />
-    <Route exact path={'/Login'} element={<Login />} />
-    <Route exact path={'/Modality'} element={<Modality />} />
-    <Route exact path={'/Schedule'} element={<Schedule />} />
-    <Route exact path={'/Student'} element={<Student />} />
-    <Route exact path={'*'} element={<NotFound />} />
+    <Route path={'/About'} element={<About />} />
+    <Route path={'/Contact'} element={<Contact />} />
+    <Route path={'/Login'} element={<Login />} />
+    <Route path={'/Modality'} element={<Modality />} />
+    <Route path={'/Schedule'} element={<Schedule />} />
+    <Route path={'/Student'} element={<Student />} />
+    <Route path={'*'} element={<NotFound />} />
   </Routes>
 );
 

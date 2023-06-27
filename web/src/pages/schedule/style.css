@@ -1,5 +1,5 @@
 .schedule div ul {
-  display: inline-block;
+  display: inline-grid;
   list-style-type: none;
   padding: 0;
 }
@@ -12,6 +12,7 @@
   font-size: 18px;
   color: white;
   padding: 8px;
+  min-height: 24px;
 }
 
 .schedule li.hour,.schedule li.dia {

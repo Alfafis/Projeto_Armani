@@ -58,7 +58,7 @@ async function addUser(req?: any, res?: any) {
   };
   const results = await con
     .promise()
-    .query(`INSERT INTO users SET ?`, newUser)
+    .query('INSERT INTO users SET ?', newUser)
     .then(([rows, fields]) => {
       console.log('results ', rows);
       return rows;
@@ -83,7 +83,7 @@ async function addStudents(req?: any, res?: any) {
   };
   const results = await con
     .promise()
-    .query(`INSERT INTO student SET ?`, newStudent)
+    .query('INSERT INTO student SET ?', newStudent)
     .then(([rows, fields]) => {
       console.log('results ', rows);
       return rows;
@@ -110,7 +110,7 @@ async function updateUsers(req?: any, res?: any) {
   }
   const results = await con
     .promise()
-    .query(`UPDATE users SET ? WHERE id = ?`, [updateUser, id])
+    .query('UPDATE users SET ? WHERE id = ?', [updateUser, id])
     .then(([rows, fields]) => {
       return rows;
     })
@@ -146,7 +146,7 @@ async function updateStudents(req?: any, res?: any) {
   }
   const results = await con
     .promise()
-    .query(`UPDATE student SET ? WHERE id = ?`, [updateStudent, id])
+    .query('UPDATE student SET ? WHERE id = ?', [updateStudent, id])
     .then(([rows, fields]) => {
       return rows;
     })

@@ -3,6 +3,7 @@ import bg_login from '../../assets/images/bg_login.png';
 import { useNavigate } from 'react-router-dom';
 import api from '../../service/api';
 import './style.css';
+import { Button } from '../../components/button';
 
 function Login() {
   const [dados, setDados] = useState<SetStateAction<any>>([]);
@@ -24,7 +25,7 @@ function Login() {
     getDados();
 
     const login = dados.find(
-      (a: any) => a.email === email && a.senha === password
+      (a: any) => a.email === email && String(a.senha) === password
     );
 
     console.log(login);
@@ -40,6 +41,7 @@ function Login() {
       sessionStorage.setItem('senha', login.senha);
 
       navigateTo('/student');
+      window.location.reload();
     }
   };
 
@@ -50,6 +52,8 @@ function Login() {
 
   useEffect(() => {
     checkLogin();
+
+    console.log(dados);
   }, [setDados, setStep]);
 
   return (
@@ -76,9 +80,14 @@ function Login() {
               id="password"
               className="login-input"
             />
-            <button type="submit" className="login-button">
-              Login
-            </button>
+            <Button
+              text="Login"
+              handle={() => SubmitEvent}
+              bg="#0f3002"
+              color="white"
+              size="100px"
+              font="18px"
+            />
           </form>
         )}
         {step === 1 && (
@@ -86,9 +95,14 @@ function Login() {
             <p className="p-form">
               Usuario e senha invalidos! <br /> tente novamente
             </p>
-            <button className="back-button" onClick={() => setStep(0)}>
-              voltar
-            </button>
+            <Button
+              text="Voltar"
+              handle={() => setStep(0)}
+              bg="white"
+              color="#0f3002"
+              size="100px"
+              font="18px"
+            />
           </div>
         )}
       </div>

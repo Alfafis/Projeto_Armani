@@ -3,7 +3,7 @@ aside.contact {
   flex-direction: column;
   justify-content: space-between;
   align-items: end;
-  width: 70%;
+  width: 60%;
   grid-gap: 100px;
 }
 .contact img {

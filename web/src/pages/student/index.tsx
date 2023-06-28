@@ -1,25 +1,62 @@
-import { SetStateAction, useEffect, useState } from 'react';
-import './style.css';
+import {
+  InputHTMLAttributes,
+  SetStateAction,
+  useEffect,
+  useState,
+} from 'react';
+import { useNavigate } from 'react-router-dom';
 import api from '../../service/api';
+import { Button } from '../../components/button';
 import {
   MdEdit,
+  MdDeblur,
   MdRestoreFromTrash,
   MdSupervisedUserCircle,
 } from 'react-icons/md';
+import './style.css';
 
-interface IStudent {
-  id: number;
+interface IStudent extends InputHTMLAttributes<HTMLInputElement> {
+  id: string;
   nome: string;
   modalidade: string;
   grau_faixa: string;
-  situacao: string;
-  dia_semana: string;
-  horario: string;
+  situacao?: string;
+  dia_semana?: string;
+  horario?: string;
 }
 
 function Student() {
   const [dados, setDados] = useState<SetStateAction<any>>([]);
+  const [studentEdit, setStudentEdit] = useState<SetStateAction<any>>([]);
+  const [newNome, setNewNome] = useState<string>('');
+  const [newModalidade, setNewModalidade] = useState<string>('');
+  const [newFaixa, setNewFaixa] = useState<string>('');
   const [step, SetStep] = useState<number>(0);
+
+  const navigate = useNavigate();
+
+  const handleEditStudent = (id: string) => {
+    console.log('chamou');
+    const student = dados.filter((a: any) => a.id === id);
+    setStudentEdit(student);
+    SetStep(1);
+  };
+
+  const handleUploadStudent = () => {
+    console.log('upload');
+    const idEdit = Number(studentEdit[0].id);
+    api()
+      .put(`${import.meta.env.VITE_API_ROTA_URL}/students/${idEdit}`, {
+        idEdit,
+        newNome,
+        newModalidade,
+        newFaixa,
+      })
+      .then((res) => setDados(res.data))
+      .catch((err) => console.log(err));
+  };
+
+  const handleDeleteStudent = () => {};
 
   const getDados = () => {
     api()
@@ -31,8 +68,9 @@ function Student() {
   useEffect(() => {
     getDados();
 
-    console.log('dados', dados);
-  }, [setDados, SetStep]);
+    console.log('studentedit', studentEdit);
+    console.log('new', newNome, newModalidade, newFaixa);
+  }, [setDados, SetStep, setStudentEdit, newNome, newModalidade, newFaixa]);
 
   return (
     <aside className="student">
@@ -69,12 +107,20 @@ function Student() {
                     <td>{grau_faixa}</td>
                     <td>{situacao}</td>
                     <td>
-                      <button>
-                        <MdEdit onClick={() => SetStep(1)} size={20} />
-                      </button>
-                      <button>
-                        <MdRestoreFromTrash size={20} />
-                      </button>
+                      <Button
+                        text={<MdEdit size={20} />}
+                        handle={() => handleEditStudent(id)}
+                        color="#222727"
+                        bg="#c9c7c7"
+                        size="42px"
+                      />
+                      <Button
+                        text={<MdRestoreFromTrash size={20} />}
+                        handle={() => handleDeleteStudent()}
+                        color="#222727"
+                        bg="#c9c7c7"
+                        size="42px"
+                      />
                     </td>
                   </tr>
                 )
@@ -85,49 +131,73 @@ function Student() {
       )}
       {step === 1 && (
         <div>
-          <h1>Editar Aluno</h1>
-          <form
-            onSubmit={() => {
-              ('');
-            }}
-          >
-            <div>
-              <label htmlFor="modalidade">Modalidade:</label>
-              <input type="text" id="modalidade" name="modalidade" />
-            </div>
+          <h1>
+            Editar Aluno
+            <MdDeblur />
+          </h1>
+          <aside className="edit">
             <div>
               <label htmlFor="nome">Nome:</label>
-              <input type="text" id="nome" name="nome" />
-            </div>
-            <div>
-              <label htmlFor="dataNascimento">Data de Nascimento:</label>
-              <input type="date" id="dataNascimento" name="dataNascimento" />
-            </div>
-            <div>
-              <label htmlFor="telefone">Telefone:</label>
-              <input type="text" id="telefone" name="telefone" />
-            </div>
-            <div>
-              <label htmlFor="diaPagamento">Dia do Pagamento:</label>
-              <input type="number" id="diaPagamento" name="diaPagamento" />
-            </div>
-            <div>
-              <label htmlFor="valorMensalidade">Valor da Mensalidade:</label>
               <input
-                type="number"
-                id="valorMensalidade"
-                name="valorMensalidade"
+                type="text"
+                id="nome"
+                name="nome"
+                placeholder={studentEdit[0].nome}
+                onChange={(e) => setNewNome(e.target.value)}
               />
             </div>
-            <button type="submit">Salvar</button>
-          </form>
+            <div>
+              <label htmlFor="modalidade">Modalidade:</label>
+              <input
+                type="text"
+                id="modalidade"
+                name="modalidade"
+                placeholder={studentEdit[0].modalidade}
+                onChange={(e) => setNewModalidade(e.target.value)}
+              />
+            </div>
+            <div>
+              <label htmlFor="nome">Grau da Faixa:</label>
+              <input
+                type="text"
+                id="grau_faixa"
+                name="grau_faixa"
+                placeholder={studentEdit[0].grau_faixa}
+                onChange={(e) => setNewFaixa(e.target.value)}
+              />
+            </div>
+            <div className="group-buttons">
+              <Button
+                text="Editar"
+                handle={() => handleUploadStudent()}
+                bg="#222727"
+                color="white"
+                size="100px"
+                font="18px"
+              />
+              <Button
+                text="Voltar"
+                handle={() => navigate(-1)}
+                bg="white"
+                color="#222727"
+                size="100px"
+                font="18px"
+              />
+            </div>
+          </aside>
         </div>
       )}
       {step === 2 && (
         <div className="container-visualizar">
           <div className="visualizar-frame">
             <div className="cadastrar">
-              <button className="cadastrar-button">Cadastrar</button>
+              <Button
+                text="Cadastrar"
+                handle={() => SubmitEvent}
+                bg="white"
+                color="#0f3002"
+                size="100px"
+              />
               <p>Pesquisar aluno</p>
             </div>
             <table>
@@ -146,7 +216,13 @@ function Student() {
                     <input type="text" />
                   </td>
                   <td>
-                    <button>Pesquisar</button>
+                    <Button
+                      text="Pesquisar"
+                      handle={() => SetStep(0)}
+                      bg="#a4a6a6"
+                      color="#222727"
+                      size="100px"
+                    />
                   </td>
                 </tr>
               </tbody>
@@ -177,31 +253,31 @@ function Student() {
               <p className="cadastro-title">Cadastrar aluno</p>
               <div className="cadastro-group">
                 <label htmlFor="nome" className="cadastro-label">
-                  Nome: ⠀
+                  Nome:
                 </label>
                 <input type="text" id="nome" className="cadastro-input" />
               </div>
               <div className="cadastro-group">
                 <label htmlFor="telefone" className="cadastro-label">
-                  Telefone: ⠀
+                  Telefone:
                 </label>
                 <input type="text" id="telefone" className="cadastro-input" />
               </div>
               <div className="cadastro-group">
                 <label htmlFor="modalidade" className="cadastro-label">
-                  Modalidade: ⠀
+                  Modalidade:
                 </label>
                 <input type="text" id="modalidade" className="cadastro-input" />
               </div>
               <div className="cadastro-group">
                 <label htmlFor="faixa" className="cadastro-label">
-                  Faixa: ⠀
+                  Faixa:
                 </label>
                 <input type="text" id="faixa" className="cadastro-input" />
               </div>
               <div className="cadastro-group">
                 <label htmlFor="dataNascimento" className="cadastro-label">
-                  Data de Nascimento: ⠀
+                  Data de Nascimento:
                 </label>
                 <input
                   type="date"
@@ -209,9 +285,13 @@ function Student() {
                   className="cadastro-input"
                 />
               </div>
-              <button type="submit" className="cadastro-button">
-                Salvar
-              </button>
+              <Button
+                text="salvar"
+                handle={() => SubmitEvent}
+                bg="white"
+                color="#0f3002"
+                size="100px"
+              />
             </form>
           </div>
         </div>

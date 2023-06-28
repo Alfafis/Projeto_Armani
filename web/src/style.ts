@@ -10,13 +10,23 @@ export const Container = styled.div`
 
 export const BgTeacher = styled.div`
   background-image: url(${BgTeache});
-  background-position: center;
+  background-repeat: no-repeat;
+  background-position: top;
+  background-size: cover;
   position: fixed;
+  height: 800px;
+  width: 600px;
   bottom: 0;
   left: 0;
-  height: 800px;
-  width: 40%;
   margin: 0;
-  background-repeat: no-repeat;
-  background-size: contain;
+  @media (max-width: 1280px) {
+    height: 500px;
+    width: 350px;
+  }
+  @media (max-width: 768px) {
+    display: none;
+  }
+  @media (max-width: 375px) {
+    display: none;
+  }
 `;

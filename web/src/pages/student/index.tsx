@@ -56,7 +56,9 @@ function Student() {
       .catch((err) => console.log(err));
   };
 
-  const handleDeleteStudent = () => {};
+  const handleDeleteStudent = () => {
+    console.log('teste');
+  };
 
   const getDados = () => {
     api()

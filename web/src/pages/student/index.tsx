@@ -96,7 +96,7 @@ function Student() {
         .then((res) => SetDados(res.data))
         .catch((err) => console.log(err));
 
-      // SetOpenAddSuccess(!openAddSuccess);
+      SetOpenAddSuccess(!openAddSuccess);
     }
   };
 

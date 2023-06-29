@@ -4,11 +4,16 @@ import Teacher from './assets/images//bg_fundo_teacher.png';
 
 export const Container = styled.div`
   display: flex;
-  place-content: center;
-  width: 100%;
-  min-height: 600px;
+  justify-content: center;
+  align-items: center;
   height: fit-content;
   margin-bottom: 24px;
+  min-height: 600px;
+  width: 100%;
+
+  @media (max-width: 768px) {
+    align-items: flex-start;
+  }
 `;
 
 export const GlobalStyle = createGlobalStyle`

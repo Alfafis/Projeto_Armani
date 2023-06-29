@@ -1,15 +1,15 @@
-/* .navbar {
-    justify-content: center;
-    padding-bottom: 100px;
-    padding: 2rem 0;
-    display: flex;
-  } */
+.navbar {
+  justify-content: center;
+  padding-bottom: 100px;
+  padding: 1.6rem 0;
+  display: flex;
+}
 
 .navbar ul.web-navbar {
   display: flex;
   margin: 0 8px;
   align-items: center;
-  justify-content: space-around;
+  justify-content: center;
 }
 
 .navbar ul.mobile-navbar {
@@ -51,6 +51,12 @@
 }
 
 @media screen and (max-width: 768px) {
+  .navbar {
+    display: unset;
+    padding: 1.6rem 0;
+    padding-bottom: 100px;
+  }
+
   div.navbar ul {
     display: block;
   }
@@ -67,6 +73,5 @@
     display: flex;
     justify-content: flex-end;
     align-items: center;
-    /* width: 100%; */
   }
 }

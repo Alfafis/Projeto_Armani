@@ -20,15 +20,12 @@ function Login() {
       .catch((err) => console.log(err));
   };
 
-  const handleCheckLogin = (event: FormEvent) => {
-    event.preventDefault();
+  const handleCheckLogin = () => {
     getDados();
 
     const login = dados.find(
       (a: any) => a.email === email && String(a.senha) === password
     );
-
-    console.log(login);
 
     if (!login) {
       console.log('email ou senha invalidos');
@@ -60,56 +57,59 @@ function Login() {
   }, [dados, setStep]);
 
   return (
-    <div className="login">
-      <div className="login-frame">
-        <img src={bg_login} alt="Login" className="bg_login" />
-        {step === 0 && (
-          <form className="login-form" onSubmit={handleCheckLogin}>
-            <label htmlFor="email" className="login-label">
-              Usuário:
-            </label>
-            <input
-              onChange={(event) => setEmail(event.target.value)}
-              type="email"
-              id="email"
-              className="login-input"
-            />
-            <label htmlFor="password" className="login-label">
-              Senha:
-            </label>
-            <input
-              onChange={(event) => setPassword(event.target.value)}
-              type="password"
-              id="password"
-              className="login-input"
-            />
-            <Button
-              text="Login"
-              handle={() => SubmitEvent}
-              bg="#0f3002"
-              color="white"
-              size="100px"
-              font="18px"
-            />
-          </form>
-        )}
-        {step === 1 && (
-          <div className="login-form">
-            <p className="p-form">
-              Usuario e senha invalidos! <br /> tente novamente
-            </p>
-            <Button
-              text="Voltar"
-              handle={() => setStep(0)}
-              bg="white"
-              color="#0f3002"
-              size="100px"
-              font="18px"
-            />
-          </div>
-        )}
-      </div>
-    </div>
+    <aside className="login">
+      {/* <div className="login-frame"> */}
+      <img src={bg_login} alt="Login" className="bg_login" />
+      {step === 0 && (
+        <div className="login-form">
+          <label htmlFor="email" className="login-label">
+            Usuário:
+          </label>
+          <input
+            onChange={(event) => setEmail(event.target.value)}
+            type="email"
+            id="email"
+            className="login-input"
+          />
+          <label htmlFor="password" className="login-label">
+            Senha:
+          </label>
+          <input
+            onChange={(event) => setPassword(event.target.value)}
+            type="password"
+            id="password"
+            className="login-input"
+            onKeyDown={(event: FormEvent) =>
+              event.which === 13 && handleCheckLogin()
+            }
+          />
+          <Button
+            text="Login"
+            handle={() => handleCheckLogin()}
+            bg="#0f3002"
+            color="white"
+            size="100px"
+            font="18px"
+          />
+        </div>
+      )}
+      {step === 1 && (
+        <div className="login-form">
+          <p className="p-form">
+            Usuario e senha invalidos! <br /> tente novamente
+          </p>
+          <Button
+            text="Voltar"
+            handle={() => setStep(0)}
+            bg="white"
+            color="#0f3002"
+            size="100px"
+            font="18px"
+          />
+        </div>
+      )}
+      {/* </div> */}
+    </aside>
   );
 }
 

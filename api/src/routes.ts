@@ -71,21 +71,21 @@ async function addUser(req?: any, res?: any) {
 }
 
 async function addStudents(req?: any, res?: any) {
-  const { nome, modalidade, grau_faixa, situacao, dia_semana, horario } =
-    req.body;
-  const newStudent: IStudent = {
-    nome,
-    modalidade,
-    grau_faixa,
-    situacao,
-    dia_semana,
-    horario,
-  };
+  // const { nome, modalidade, grau_faixa, situacao, dia_semana, horario } =
+  //   req.body;
+  // const newStudent: IStudent = {
+  //   nome,
+  //   modalidade,
+  //   grau_faixa,
+  //   situacao,
+  //   dia_semana,
+  //   horario,
+  // };
   const results = await con
     .promise()
     .query(
-      'INSERT INTO student (`id`, `nome`, `modalidade`, `grau_faixa`, `situacao`,`dia_semana`,   `horario`) VALUES ?',
-      newStudent
+      'INSERT INTO student (`id`, `nome`, `modalidade`, `grau_faixa`, `situacao`, `dia_semana`,   `horario`) VALUES ?',
+      req.body
     )
     .then(([rows, fields]) => {
       console.log('results ', rows);

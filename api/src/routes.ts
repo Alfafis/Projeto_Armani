@@ -58,7 +58,7 @@ async function addUser(req?: any, res?: any) {
   };
   const results = await con
     .promise()
-    .query('INSERT INTO users SET ?', newUser)
+    .query('INSERT INTO users VALUES ?', newUser)
     .then(([rows, fields]) => {
       console.log('results ', rows);
       return rows;
@@ -83,7 +83,7 @@ async function addStudents(req?: any, res?: any) {
   };
   const results = await con
     .promise()
-    .query('INSERT INTO student SET ?', newStudent)
+    .query('INSERT INTO student VALUES ?', newStudent)
     .then(([rows, fields]) => {
       console.log('results ', rows);
       return rows;

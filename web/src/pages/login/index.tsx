@@ -24,7 +24,7 @@ function Login() {
     getDados();
 
     const login = dados.find(
-      (a: any) => a.email === email && String(a.senha) === password
+      (a: any) => a.email === email && a.senha == password
     );
 
     if (!login) {
@@ -50,6 +50,7 @@ function Login() {
   useEffect(() => {
     if (dados.length < 1) {
       getDados();
+
       checkLogin();
     }
 

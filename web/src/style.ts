@@ -19,7 +19,7 @@ export const GlobalStyle = createGlobalStyle`
     background-position: center;
     background-repeat: no-repeat;
     position: relative;
-    height: 100vh;
+    min-height: 100vh;
     margin: 0;
   }
 `;

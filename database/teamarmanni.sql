@@ -28,7 +28,7 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `modality` (
-  `id` int(11) NOT NULL,
+  `id` int(11) UNIQUE NOT NULL AUTO_INCREMENT,
   `nome` varchar(255) NOT NULL,
   `dia_semana` enum('Segunda','Terça','Quarta','Quinta','Sexta','Sábado','Domingo') NOT NULL,
   `horario` time DEFAULT NULL
@@ -95,7 +95,7 @@ INSERT INTO `modality` (`id`, `nome`, `dia_semana`, `horario`) VALUES
 --
 
 CREATE TABLE `student` (
-  `id` int(11) NOT NULL,
+  `id` int(11) UNIQUE NOT NULL AUTO_INCREMENT,
   `nome` varchar(255) DEFAULT NULL,
   `modalidade` varchar(255) NOT NULL,
   `grau_faixa` varchar(255) NOT NULL,
@@ -122,11 +122,11 @@ INSERT INTO `student` (`id`, `nome`, `modalidade`, `grau_faixa`, `situacao`,`dia
 --
 
 CREATE TABLE `users` (
-  `id` int(11) NOT NULL,
+  `id` int(11) UNIQUE NOT NULL AUTO_INCREMENT,
   `nome` varchar(255) DEFAULT NULL,
   `email` varchar(255) NOT NULL,
   `senha` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+)
 
 --
 -- Despejando dados para a tabela `usuarios`
@@ -135,4 +135,4 @@ CREATE TABLE `users` (
 INSERT INTO `users` (`id`, `nome`, `email`, `senha`) VALUES
 (1, "Rafael", "rafael@email.com.br", 123),
 (2, "Otávio", "otavio@email.com.br", 321),
-(3, "Ingrid", "ingrid@email.com.br", 000),
+(3, "Ingrid", "ingrid@email.com.br", 000);

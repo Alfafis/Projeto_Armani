@@ -76,6 +76,8 @@ function Student() {
 
   const handleAddStudent = () => {
     const lastUser = dados[dados.length - 1];
+    lastUser.id = lastUser.id + 1;
+
     console.log(lastUser.id + 1);
     console.log(newNome.length);
 
@@ -83,22 +85,18 @@ function Student() {
       SetOpenModalAlert(!openModalAlert);
     } else {
       api()
-        .post(
-          `${import.meta.env.VITE_API_ROTA_URL}/students/${lastUser.id + 1}`,
-          {
-            id: lastUser.id + 1,
-            nome: newNome,
-            modalidade: newModalidade,
-            grau_faixa: newFaixa,
-            situacao: lastUser.situacao,
-            dia_semana: lastUser.dia_semana,
-            horario: lastUser.horario,
-          }
-        )
+        .post(`${import.meta.env.VITE_API_ROTA_URL}/students`, {
+          dia_semana: lastUser.dia_semana,
+          grau_faixa: newFaixa,
+          horario: lastUser.horario,
+          modalidade: newModalidade,
+          nome: newNome,
+          situacao: lastUser.situacao,
+        })
         .then((res) => SetDados(res.data))
         .catch((err) => console.log(err));
 
-      SetOpenAddSuccess(!openAddSuccess);
+      // SetOpenAddSuccess(!openAddSuccess);
     }
   };
 

@@ -83,7 +83,10 @@ async function addStudents(req?: any, res?: any) {
   };
   const results = await con
     .promise()
-    .query('INSERT INTO student VALUES ?', newStudent)
+    .query(
+      'INSERT INTO student (`id`, `nome`, `modalidade`, `grau_faixa`, `situacao`,`dia_semana`,   `horario`) VALUES ?',
+      newStudent
+    )
     .then(([rows, fields]) => {
       console.log('results ', rows);
       return rows;

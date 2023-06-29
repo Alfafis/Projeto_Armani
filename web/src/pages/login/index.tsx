@@ -1,4 +1,4 @@
-import { FormEvent, SetStateAction, useEffect, useState } from 'react';
+import { SetStateAction, useEffect, useState } from 'react';
 import bg_login from '../../assets/images/bg_login.png';
 import { useNavigate } from 'react-router-dom';
 import api from '../../service/api';
@@ -79,9 +79,7 @@ function Login() {
             type="password"
             id="password"
             className="login-input"
-            onKeyDown={(event: FormEvent) =>
-              event.which === 13 && handleCheckLogin()
-            }
+            onKeyDown={(event: any) => event.which === 13 && handleCheckLogin()}
           />
           <Button
             text="Login"

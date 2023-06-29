@@ -1,4 +1,3 @@
-import { FormEvent } from 'react';
 import { Buttons } from './style';
 
 export interface IButton {
@@ -29,7 +28,7 @@ export const Button = ({
   return (
     <Buttons
       onClick={handle}
-      onKeyDown={(event: FormEvent) => event.which === 13 && handle}
+      onKeyDown={(event: any) => event.which === 13 && handle}
       size={size}
       color={color}
       bg={bg}

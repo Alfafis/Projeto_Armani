@@ -3,6 +3,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { VscAccount, VscSignOut, VscHome } from 'react-icons/vsc';
 
 import './style.css';
+import { GlobalStyle } from '../../style';
 
 function Navbar() {
   const [step, SetStep] = useState<number>(0);
@@ -31,6 +32,7 @@ function Navbar() {
 
   return (
     <div className="navbar">
+      <GlobalStyle path={location.pathname} />
       <ul>
         <li>
           <Link to="/">

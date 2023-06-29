@@ -1,5 +1,6 @@
-import styled from 'styled-components';
-import BgTeache from './assets/images/bg_teacher.png';
+import styled, { createGlobalStyle } from 'styled-components';
+import NoTeacher from './assets/images/bg_novo_fundo.png';
+import Teacher from './assets/images//bg_fundo_teacher.png';
 
 export const Container = styled.div`
   display: flex;
@@ -8,25 +9,17 @@ export const Container = styled.div`
   height: 100%;
 `;
 
-export const BgTeacher = styled.div`
-  background-image: url(${BgTeache});
-  background-repeat: no-repeat;
-  background-position: top;
-  background-size: cover;
-  position: fixed;
-  height: 800px;
-  width: 600px;
-  bottom: 0;
-  left: 0;
-  margin: 0;
-  @media (max-width: 1280px) {
-    height: 500px;
-    width: 350px;
-  }
-  @media (max-width: 768px) {
-    display: none;
-  }
-  @media (max-width: 375px) {
-    display: none;
+export const GlobalStyle = createGlobalStyle`
+  body {
+    background-image: ${(props: { path: string }) =>
+      props.path !== '/contact' && props.path !== '/'
+        ? `url(${NoTeacher})`
+        : `url(${Teacher})`};
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+    height: 100vh;
+    margin: 0;
   }
 `;

@@ -2,7 +2,7 @@ aside.contact {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  align-items: end;
+  align-items: center;
   width: 60%;
   grid-gap: 100px;
 }

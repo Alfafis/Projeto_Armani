@@ -49,6 +49,7 @@
   background-color: #c9c7c7;
   text-transform: uppercase;
   color: #222727;
+  font-weight: bold;
   text-align: center;
   font-size: 20px;
   padding: 4px;
@@ -58,6 +59,7 @@
   background-color: #c9c7c7;
   text-transform: capitalize;
   text-align: center;
+  font-weight: bold;
   font-size: 18px;
   padding: 2px;
 }
@@ -132,4 +134,24 @@
   background-color: #222727;
   border: none;
   padding: 4px 12px;
+}
+
+@media (max-width: 425px) {
+  .student {
+    min-width: 100%;
+  }
+  .student table {
+    width: 100%;
+  }
+  .student h1 {
+    font-size: 24px;
+  }
+  .student table thead th {
+    font-size: 14px;
+    width: fit-content;
+  }
+  .student table tbody td {
+    font-size: 14px;
+    width: fit-content;
+  }
 }

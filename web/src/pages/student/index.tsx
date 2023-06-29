@@ -60,6 +60,10 @@ function Student() {
   const handleEditStudent = (id: string) => {
     const student = dados.filter((a: any) => a.id === id);
     SetStudentSelected(student);
+    console.log(student);
+    SetNewNome(student[0].nome);
+    SetNewModalidade(student[0].modalidade);
+    SetNewFaixa(student[0].grau_faixa);
     SetStep('edit_student');
   };
 
@@ -151,7 +155,6 @@ function Student() {
     if (dados.length < 1) {
       getDados();
     }
-    console.log('dados ', dados);
   }, [dados, step, studentSelected, newNome, newModalidade, newFaixa]);
 
   return (
@@ -247,7 +250,7 @@ function Student() {
                   type="text"
                   id="nome"
                   name="nome"
-                  placeholder={studentSelected[0].nome}
+                  value={newNome}
                   onChange={(e) => SetNewNome(e.target.value)}
                 />
               </div>
@@ -257,7 +260,7 @@ function Student() {
                   type="text"
                   id="modalidade"
                   name="modalidade"
-                  placeholder={studentSelected[0].modalidade}
+                  value={newModalidade}
                   onChange={(e) => SetNewModalidade(e.target.value)}
                 />
               </div>
@@ -267,7 +270,7 @@ function Student() {
                   type="text"
                   id="grau_faixa"
                   name="grau_faixa"
-                  placeholder={studentSelected[0].grau_faixa}
+                  value={newFaixa}
                   onChange={(e) => SetNewFaixa(e.target.value)}
                 />
               </div>

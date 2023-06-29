@@ -10,4 +10,24 @@ max-width: 80%;
 
 .about img {
   width: 50%;
+  object-fit: contain;
+  height: fit-content;
+}
+
+@media (max-width: 1280px) {
+  .about img {
+  width: 30%;
+  }
+}
+@media (max-width: 768px) {
+  .about img {
+    display: none;
+    width: 20%;
+  }
+}
+@media (max-width: 375px) {
+  .about img {
+    display: none;
+    width: 30%;
+    }
 }

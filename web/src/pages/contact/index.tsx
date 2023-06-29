@@ -50,10 +50,12 @@ const Contact = () => {
           <span>Enviar Mensagem</span>
         </a>
       </div>
-      <label>
-        Localização: Av. Professor José Maurício, 381 - Lindéia, Belo Horizonte
-        - MG, 32400-000
-      </label>
+      <div className="label">
+        <label>
+          Localização: Av. Professor José Maurício, 381 - Lindéia, Belo
+          Horizonte - MG, 32400-000
+        </label>
+      </div>
     </aside>
   );
 };

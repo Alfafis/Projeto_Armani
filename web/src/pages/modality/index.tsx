@@ -78,15 +78,15 @@ function Modality() {
                 de autodefesa que podem ser úteis em situações de perigo.
               </li>
             </ul>
-            <Button
-              text="Voltar"
-              handle={() => SetStep(0)}
-              bg="white"
-              color="#222727"
-              size="100px"
-              font="18px"
-            />
           </div>
+          <Button
+            text="Voltar"
+            handle={() => SetStep(0)}
+            bg="white"
+            color="#222727"
+            size="100px"
+            font="18px"
+          />
         </aside>
       )}
 
@@ -139,15 +139,15 @@ function Modality() {
                 eficientes durante os combates.
               </li>
             </ul>
-            <Button
-              text="Voltar"
-              handle={() => SetStep(0)}
-              bg="white"
-              color="#222727"
-              size="100px"
-              font="18px"
-            />
           </div>
+          <Button
+            text="Voltar"
+            handle={() => SetStep(0)}
+            bg="white"
+            color="#222727"
+            size="100px"
+            font="18px"
+          />
         </aside>
       )}
     </>

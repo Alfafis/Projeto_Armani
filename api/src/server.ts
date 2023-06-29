@@ -34,8 +34,8 @@ app.get('/modality', getModality);
 app.get('/students', getStudents);
 
 // rotas POST
-app.post('/users/:id', addUser);
-app.post('/students/:id', addStudents);
+app.post('/users', addUser);
+app.post('/students', addStudents);
 
 // rotas PUT
 app.put('/users/:id', updateUsers);

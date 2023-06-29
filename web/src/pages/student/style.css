@@ -11,7 +11,18 @@
 }
 
 .student form {
-  padding-bottom: 16px;
+  display: flex;
+  margin-bottom: 16px;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.student h3 {
+  width: 100%;
+  color: #c9c7c7;
+  padding: 0;
+  margin: 0;
+  text-align: end;
 }
 
 .student form label {
@@ -21,7 +32,6 @@
 
 .student form input {
   margin: 0 12px;
-  background-color: #c9c7c7;
   color: white;
   border: none;
   padding: 4px 12px;
@@ -68,12 +78,23 @@
   color: white;
 }
 
-.edit {
+.edit, .delete {
   background-color: #c9c7c7;
   padding: 4px;
 }
 
-.edit .group-buttons {
+.delete {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.delete > div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.edit .group-buttons, .delete .group-buttons {
   display: grid;
   grid-template-columns: repeat(2, 100px);
   align-items: center;
@@ -86,7 +107,19 @@
   display: flex;
 }
 
-.student .edit label {
+.student .delete div label {
+  width: fit-content;
+  text-align: initial;
+  padding-right: 10px;
+  font-size: 24px;
+}
+
+.student .delete h3 {
+  font-size: 24px;
+  color: #222727;
+}
+
+.student .edit label, .student .delete label {
   width: 200px;
   font-size: 18px;
   font-weight: bold;

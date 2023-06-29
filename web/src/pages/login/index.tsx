@@ -13,8 +13,8 @@ function Login() {
 
   const navigateTo = useNavigate();
 
-  const getDados = () => {
-    api()
+  const getDados = async () => {
+    await api()
       .get(`${import.meta.env.VITE_API_ROTA_URL}/users`, {})
       .then((res) => setDados(res.data))
       .catch((err) => console.log(err));
@@ -51,10 +51,13 @@ function Login() {
   };
 
   useEffect(() => {
-    checkLogin();
+    if (dados.length < 1) {
+      getDados();
+      checkLogin();
+    }
 
-    console.log(dados);
-  }, [setDados, setStep]);
+    console.log('dados', dados);
+  }, [dados, setStep]);
 
   return (
     <div className="login">

@@ -4,16 +4,23 @@ import {
   useEffect,
   useState,
 } from 'react';
-import { useNavigate } from 'react-router-dom';
 import api from '../../service/api';
+
 import { Button } from '../../components/button';
+import { Modal } from '../../components/modal';
 import {
-  MdEdit,
-  MdDeblur,
-  MdRestoreFromTrash,
-  MdSupervisedUserCircle,
-} from 'react-icons/md';
+  FaPen,
+  FaLock,
+  FaUserPen,
+  FaLockOpen,
+  FaUserLock,
+  FaUsersGear,
+  FaCircleCheck,
+  FaUserPlus,
+} from 'react-icons/fa6';
+
 import './style.css';
+import { useNavigate } from 'react-router-dom';
 
 interface IStudent extends InputHTMLAttributes<HTMLInputElement> {
   id: string;
@@ -26,69 +33,143 @@ interface IStudent extends InputHTMLAttributes<HTMLInputElement> {
 }
 
 function Student() {
-  const [dados, setDados] = useState<SetStateAction<any>>([]);
-  const [studentEdit, setStudentEdit] = useState<SetStateAction<any>>([]);
-  const [newNome, setNewNome] = useState<string>('');
-  const [newModalidade, setNewModalidade] = useState<string>('');
-  const [newFaixa, setNewFaixa] = useState<string>('');
-  const [step, SetStep] = useState<number>(0);
+  // Estado de listagem do aluno
+  const [dados, SetDados] = useState<SetStateAction<any>>([]);
+  // Estado de seleção do aluno
+  const [studentSelected, SetStudentSelected] = useState<SetStateAction<any>>(
+    []
+  );
+  // Estado de edição do aluno
+  const [newNome, SetNewNome] = useState<string>('');
+  const [newModalidade, SetNewModalidade] = useState<string>('');
+  const [newFaixa, SetNewFaixa] = useState<string>('');
 
-  const navigate = useNavigate();
+  // Estado de Etapa da página
+  const [step, SetStep] = useState<string>('manager');
+
+  // Estado dos tipos de modals
+  // const [openModalAlert, SetOpenModalAlert] = useState<boolean>(false);
+  const [openAddSuccess, SetOpenAddSuccess] = useState<boolean>(false);
+  const [openEditSuccess, SetOpenEditSuccess] = useState<boolean>(false);
+  const [openInativeSuccess, SetOpenInativeSuccess] = useState<boolean>(false);
+  const [openActiveSuccess, SetOpenActiveSuccess] = useState<boolean>(false);
+
+  const navigateTo = useNavigate();
 
   const handleEditStudent = (id: string) => {
-    console.log('chamou');
     const student = dados.filter((a: any) => a.id === id);
-    setStudentEdit(student);
-    SetStep(1);
+    SetStudentSelected(student);
+    SetStep('edit_student');
+  };
+
+  const handleCheckStatusStudent = (id: string) => {
+    const student = dados.filter((a: any) => a.id === id);
+    SetStudentSelected(student);
+
+    console.log(student[0].situacao);
+
+    student[0].situacao === 'irregular'
+      ? SetStep('active')
+      : SetStep('inative');
+  };
+
+  const handleAddStudent = () => {
+    api()
+      .post(`${import.meta.env.VITE_API_ROTA_URL}/students`, {
+        nome: newNome !== '' ? newNome : studentSelected[0].nome,
+        modalidade:
+          newModalidade !== '' ? newModalidade : studentSelected[0].modalidade,
+        grau_faixa: newFaixa !== '' ? newFaixa : studentSelected[0].grau_faixa,
+      })
+      .then((res) => SetDados(res.data))
+      .catch((err) => console.log(err));
+
+    SetOpenAddSuccess(!openAddSuccess);
   };
 
   const handleUploadStudent = () => {
-    console.log('upload');
-    const idEdit = Number(studentEdit[0].id);
+    const idEdit = Number(studentSelected[0].id);
     api()
       .put(`${import.meta.env.VITE_API_ROTA_URL}/students/${idEdit}`, {
-        idEdit,
-        newNome,
-        newModalidade,
-        newFaixa,
+        id: idEdit,
+        nome: newNome !== '' ? newNome : studentSelected[0].nome,
+        modalidade:
+          newModalidade !== '' ? newModalidade : studentSelected[0].modalidade,
+        grau_faixa: newFaixa !== '' ? newFaixa : studentSelected[0].grau_faixa,
       })
-      .then((res) => setDados(res.data))
+      .then((res) => SetDados(res.data))
       .catch((err) => console.log(err));
+
+    SetOpenEditSuccess(!openEditSuccess);
   };
 
-  const handleDeleteStudent = () => {
-    console.log('teste');
-  };
-
-  const getDados = () => {
+  const handleInativeStudent = (id: number) => {
     api()
+      .put(`${import.meta.env.VITE_API_ROTA_URL}/students/${id}`, {
+        id: id,
+        situacao: 'irregular',
+      })
+      .then((res) => SetDados(res.data))
+      .catch((err) => console.log(err));
+
+    SetOpenInativeSuccess(!openInativeSuccess);
+  };
+
+  const handleActiveStudent = (id: number) => {
+    api()
+      .put(`${import.meta.env.VITE_API_ROTA_URL}/students/${id}`, {
+        id: id,
+        situacao: 'regular',
+      })
+      .then((res) => SetDados(res.data))
+      .catch((err) => console.log(err));
+
+    SetOpenActiveSuccess(!openActiveSuccess);
+  };
+
+  const getDados = async () => {
+    await api()
       .get(`${import.meta.env.VITE_API_ROTA_URL}/students`, {})
-      .then((res) => setDados(res.data))
+      .then((res) => SetDados(res.data))
       .catch((err) => console.log(err));
   };
 
   useEffect(() => {
-    getDados();
-
-    console.log('studentedit', studentEdit);
-    console.log('new', newNome, newModalidade, newFaixa);
-  }, [setDados, SetStep, setStudentEdit, newNome, newModalidade, newFaixa]);
+    if (dados.length < 1) {
+      getDados();
+    }
+    console.log('dados ', studentSelected);
+  }, [dados, step, studentSelected, newNome, newModalidade, newFaixa]);
 
   return (
     <aside className="student">
-      {step === 0 && (
+      {step === 'manager' && (
         <>
           <h1>
             Gerenciar Alunos
-            <MdSupervisedUserCircle />
+            <FaUsersGear />
           </h1>
           <form>
+            <Button
+              text="Adicionar Aluno"
+              icon={<FaUserPlus size={32} />}
+              handle={() => SetStep('add')}
+              bg="#222727"
+              color="#c9c7c7"
+              size="fit-content"
+              display="flex"
+              justify="flex-end"
+              align="center"
+            />
+            {/* 
+            filtros para feature futura
             <label htmlFor="">Nome:</label>
             <input type="text" placeholder="" />
             <label htmlFor="">Modalidade:</label>
             <input type="text" placeholder="" />
             <label htmlFor="">Faixa:</label>
             <input type="text" placeholder="" />
+            */}
           </form>
           <table>
             <thead>
@@ -110,18 +191,26 @@ function Student() {
                     <td>{situacao}</td>
                     <td>
                       <Button
-                        text={<MdEdit size={20} />}
+                        text={<FaPen size={20} />}
                         handle={() => handleEditStudent(id)}
                         color="#222727"
                         bg="#c9c7c7"
-                        size="42px"
+                        size="fit-content"
                       />
                       <Button
-                        text={<MdRestoreFromTrash size={20} />}
-                        handle={() => handleDeleteStudent()}
+                        text={
+                          situacao === 'regular' ? (
+                            <FaLockOpen size={20} />
+                          ) : (
+                            <FaLock size={20} />
+                          )
+                        }
+                        handle={() => {
+                          handleCheckStatusStudent(id);
+                        }}
                         color="#222727"
                         bg="#c9c7c7"
-                        size="42px"
+                        size="fit-content"
                       />
                     </td>
                   </tr>
@@ -131,172 +220,281 @@ function Student() {
           </table>
         </>
       )}
-      {step === 1 && (
-        <div>
-          <h1>
-            Editar Aluno
-            <MdDeblur />
-          </h1>
-          <aside className="edit">
-            <div>
-              <label htmlFor="nome">Nome:</label>
-              <input
-                type="text"
-                id="nome"
-                name="nome"
-                placeholder={studentEdit[0].nome}
-                onChange={(e) => setNewNome(e.target.value)}
-              />
-            </div>
-            <div>
-              <label htmlFor="modalidade">Modalidade:</label>
-              <input
-                type="text"
-                id="modalidade"
-                name="modalidade"
-                placeholder={studentEdit[0].modalidade}
-                onChange={(e) => setNewModalidade(e.target.value)}
-              />
-            </div>
-            <div>
-              <label htmlFor="nome">Grau da Faixa:</label>
-              <input
-                type="text"
-                id="grau_faixa"
-                name="grau_faixa"
-                placeholder={studentEdit[0].grau_faixa}
-                onChange={(e) => setNewFaixa(e.target.value)}
-              />
-            </div>
-            <div className="group-buttons">
-              <Button
-                text="Editar"
-                handle={() => handleUploadStudent()}
-                bg="#222727"
-                color="white"
-                size="100px"
-                font="18px"
-              />
-              <Button
-                text="Voltar"
-                handle={() => navigate(-1)}
-                bg="white"
-                color="#222727"
-                size="100px"
-                font="18px"
-              />
-            </div>
-          </aside>
-        </div>
-      )}
-      {step === 2 && (
-        <div className="container-visualizar">
-          <div className="visualizar-frame">
-            <div className="cadastrar">
-              <Button
-                text="Cadastrar"
-                handle={() => SubmitEvent}
-                bg="white"
-                color="#0f3002"
-                size="100px"
-              />
-              <p>Pesquisar aluno</p>
-            </div>
-            <table>
-              <tbody>
-                <tr>
-                  <td>NOME:</td>
-                  <td>
-                    <input type="text" />
-                  </td>
-                  <td>MODALIDADE:</td>
-                  <td>
-                    <input type="text" />
-                  </td>
-                  <td>FAIXA:</td>
-                  <td>
-                    <input type="text" />
-                  </td>
-                  <td>
-                    <Button
-                      text="Pesquisar"
-                      handle={() => SetStep(0)}
-                      bg="#a4a6a6"
-                      color="#222727"
-                      size="100px"
-                    />
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-            <div className="resultado-container">
-              <p>Resultado da pesquisa</p>
-            </div>
-
-            <div className="resultado-frame">
-              <table>
-                <tbody>
-                  <tr>
-                    <td>NOME</td>
-                    <td>MODALIDADE</td>
-                    <td>FAIXA</td>
-                  </tr>
-                  {/* LÓGICA */}
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
-      )}
-      {step === 2 && (
-        <div className="cadastro-container">
-          <div className="cadastro-frame">
-            <form className="cadastro-form">
-              <p className="cadastro-title">Cadastrar aluno</p>
-              <div className="cadastro-group">
-                <label htmlFor="nome" className="cadastro-label">
-                  Nome:
-                </label>
-                <input type="text" id="nome" className="cadastro-input" />
-              </div>
-              <div className="cadastro-group">
-                <label htmlFor="telefone" className="cadastro-label">
-                  Telefone:
-                </label>
-                <input type="text" id="telefone" className="cadastro-input" />
-              </div>
-              <div className="cadastro-group">
-                <label htmlFor="modalidade" className="cadastro-label">
-                  Modalidade:
-                </label>
-                <input type="text" id="modalidade" className="cadastro-input" />
-              </div>
-              <div className="cadastro-group">
-                <label htmlFor="faixa" className="cadastro-label">
-                  Faixa:
-                </label>
-                <input type="text" id="faixa" className="cadastro-input" />
-              </div>
-              <div className="cadastro-group">
-                <label htmlFor="dataNascimento" className="cadastro-label">
-                  Data de Nascimento:
-                </label>
+      {step === 'edit_student' && (
+        <>
+          <div>
+            <h1>
+              Editar Aluno
+              <FaUserPen />
+            </h1>
+            <aside className="edit">
+              <div>
+                <label htmlFor="nome">Nome:</label>
                 <input
-                  type="date"
-                  id="dataNascimento"
-                  className="cadastro-input"
+                  type="text"
+                  id="nome"
+                  name="nome"
+                  placeholder={studentSelected[0].nome}
+                  onChange={(e) => SetNewNome(e.target.value)}
                 />
               </div>
-              <Button
-                text="salvar"
-                handle={() => SubmitEvent}
-                bg="white"
-                color="#0f3002"
-                size="100px"
-              />
-            </form>
+              <div>
+                <label htmlFor="modalidade">Modalidade:</label>
+                <input
+                  type="text"
+                  id="modalidade"
+                  name="modalidade"
+                  placeholder={studentSelected[0].modalidade}
+                  onChange={(e) => SetNewModalidade(e.target.value)}
+                />
+              </div>
+              <div>
+                <label htmlFor="nome">Grau da Faixa:</label>
+                <input
+                  type="text"
+                  id="grau_faixa"
+                  name="grau_faixa"
+                  placeholder={studentSelected[0].grau_faixa}
+                  onChange={(e) => SetNewFaixa(e.target.value)}
+                />
+              </div>
+              <div className="group-buttons">
+                <Button
+                  text="Editar"
+                  handle={() => handleUploadStudent()}
+                  bg="#222727"
+                  color="white"
+                  size="fit-content"
+                  font="18px"
+                />
+                <Button
+                  text="Voltar"
+                  handle={() => SetStep('manager')}
+                  bg="white"
+                  color="#222727"
+                  size="fit-content"
+                  font="18px"
+                />
+              </div>
+            </aside>
           </div>
-        </div>
+          <Modal
+            showModal={openEditSuccess}
+            text="Aluno editado com Sucesso!"
+            symbol={<FaCircleCheck size={42} color="#222727" />}
+            button={
+              <Button
+                text="Voltar"
+                handle={() => (
+                  navigateTo('/student'), window.location.reload()
+                )}
+                bg="#222727"
+                color="white"
+                size="fit-content"
+                font="18px"
+              />
+            }
+          />
+        </>
+      )}
+      {step === 'inative' && (
+        <>
+          <div>
+            <h1>
+              Inativar Aluno
+              <FaUserLock />
+            </h1>
+            <aside className="delete">
+              <div>
+                <label htmlFor="">Nome:</label>
+                <h3>{studentSelected[0].nome}</h3>
+              </div>
+              <div>
+                <label htmlFor="">Modalidade:</label>
+                <h3>{studentSelected[0].modalidade}</h3>
+              </div>
+              <div>
+                <label htmlFor="">Faixa:</label>
+                <h3>{studentSelected[0].grau_faixa}</h3>
+              </div>
+              <div className="group-buttons">
+                <Button
+                  text="Inativar"
+                  handle={() => handleInativeStudent(studentSelected[0].id)}
+                  bg="#222727"
+                  color="white"
+                  size="fit-content"
+                  font="18px"
+                />
+                <Button
+                  text="Voltar"
+                  handle={() => SetStep('manager')}
+                  bg="white"
+                  color="#222727"
+                  size="fit-content"
+                  font="18px"
+                />
+              </div>
+            </aside>
+          </div>
+          <Modal
+            showModal={openInativeSuccess}
+            text={`Aluno ${studentSelected[0].nome} está Inativado!`}
+            symbol={<FaCircleCheck size={42} color="#222727" />}
+            button={
+              <Button
+                text="Voltar"
+                handle={() => (
+                  navigateTo('/student'), window.location.reload()
+                )}
+                bg="#222727"
+                color="white"
+                size="fit-content"
+                font="18px"
+              />
+            }
+          />
+        </>
+      )}
+      {step === 'active' && (
+        <>
+          <div>
+            <h1>
+              Reativar Aluno
+              <FaUserLock />
+            </h1>
+            <aside className="delete">
+              <div>
+                <label htmlFor="">Nome:</label>
+                <h3>{studentSelected[0].nome}</h3>
+              </div>
+              <div>
+                <label htmlFor="">Modalidade:</label>
+                <h3>{studentSelected[0].modalidade}</h3>
+              </div>
+              <div>
+                <label htmlFor="">Faixa:</label>
+                <h3>{studentSelected[0].grau_faixa}</h3>
+              </div>
+              <div>
+                <label htmlFor="">Situação:</label>
+                <h3>{studentSelected[0].situacao}</h3>
+              </div>
+              <div className="group-buttons">
+                <Button
+                  text="Reativar"
+                  handle={() => handleActiveStudent(studentSelected[0].id)}
+                  bg="#222727"
+                  color="white"
+                  size="fit-content"
+                  font="18px"
+                />
+                <Button
+                  text="Voltar"
+                  handle={() => SetStep('manager')}
+                  bg="white"
+                  color="#222727"
+                  size="fit-content"
+                  font="18px"
+                />
+              </div>
+            </aside>
+          </div>
+          <Modal
+            showModal={openActiveSuccess}
+            text={`Aluno ${studentSelected[0].nome} está Reativado!`}
+            symbol={<FaCircleCheck size={42} color="#222727" />}
+            button={
+              <Button
+                text="Voltar"
+                handle={() => (
+                  navigateTo('/student'), window.location.reload()
+                )}
+                bg="#222727"
+                color="white"
+                size="fit-content"
+                font="18px"
+              />
+            }
+          />
+        </>
+      )}
+      {step === 'add' && (
+        <>
+          <div>
+            <h1>
+              Adicionar Aluno
+              <FaUserPlus />
+            </h1>
+            <aside className="edit">
+              <div>
+                <label htmlFor="nome">Nome:</label>
+                <input
+                  type="text"
+                  id="nome"
+                  name="nome"
+                  placeholder=""
+                  onChange={(e) => SetNewNome(e.target.value)}
+                />
+              </div>
+              <div>
+                <label htmlFor="modalidade">Modalidade:</label>
+                <input
+                  type="text"
+                  id="modalidade"
+                  name="modalidade"
+                  placeholder=""
+                  onChange={(e) => SetNewModalidade(e.target.value)}
+                />
+              </div>
+              <div>
+                <label htmlFor="nome">Grau da Faixa:</label>
+                <input
+                  type="text"
+                  id="grau_faixa"
+                  name="grau_faixa"
+                  placeholder=""
+                  onChange={(e) => SetNewFaixa(e.target.value)}
+                />
+              </div>
+              <div className="group-buttons">
+                <Button
+                  text="Adicionar"
+                  handle={() => handleAddStudent()}
+                  bg="#222727"
+                  color="white"
+                  size="fit-content"
+                  font="18px"
+                />
+                <Button
+                  text="Voltar"
+                  handle={() => SetStep('manager')}
+                  bg="white"
+                  color="#222727"
+                  size="fit-content"
+                  font="18px"
+                />
+              </div>
+            </aside>
+          </div>
+          <Modal
+            showModal={openAddSuccess}
+            text="Aluno adicionado com Sucesso!"
+            symbol={<FaCircleCheck size={42} color="#222727" />}
+            button={
+              <Button
+                text="Voltar"
+                handle={() => (
+                  navigateTo('/student'), window.location.reload()
+                )}
+                bg="#222727"
+                color="white"
+                size="fit-content"
+                font="18px"
+              />
+            }
+          />
+        </>
       )}
     </aside>
   );

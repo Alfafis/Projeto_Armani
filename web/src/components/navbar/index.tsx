@@ -38,19 +38,19 @@ function Navbar() {
           </Link>
         </li>
         <li>
-          <Link to="/About">Quem Somos</Link>
+          <Link to="/about">Quem Somos</Link>
         </li>
         <li>
-          <Link to="/Modality">Modalidades</Link>
+          <Link to="/modality">Modalidades</Link>
         </li>
         <li>
-          <Link to="/Schedule">Horários</Link>
+          <Link to="/schedule">Horários</Link>
         </li>
         <li>
-          <Link to="/Contact">Contato</Link>
+          <Link to="/contact">Contato</Link>
         </li>
         <li>
-          <Link to="/Login">
+          <Link to="/login">
             <VscAccount size={32} />
           </Link>
         </li>
